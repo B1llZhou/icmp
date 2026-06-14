@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>In cielo mi portò · 意大利国庆之旅 2026.10</title>
+<style>
+:root {
+  --bg: #e8ecf1;
+  --bg-card: #f4f6f9;
+  --bg-secondary: #dde3ea;
+  --text: #2c323b;
+  --text-secondary: #4b5563;
+  --text-muted: #8896a7;
+  --border: #c8d0da;
+  --accent: #3b75c4;
+  --accent-light: #e1ecf8;
+  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 0.2s ease;
+  --danger: #c44; --danger-bg: #fef0f0; --danger-border: #d8a0a0;
+  --warn: #c08030; --warn-bg: #fef9e7; --warn-border: #d4c060;
+  --info: #5090c0; --info-bg: #e8f0f8; --info-border: #90b8d8;
+  --green: #5a9860; --green-bg: #c8e6c9; --green-border: #66bb6a;
+  --tl-dot: #a0b0c0; --tl-hl: #3b75c4; --tl-wl: #c08030;
+}
+[data-theme="dark"] {
+  --bg: #1e2127; --bg-card: #252830; --bg-secondary: #2c3038;
+  --text: #c8ccd4; --text-secondary: #8b92a0; --text-muted: #5c6370;
+  --border: #373b44; --accent: #61afef; --accent-light: #1e2d3d;
+  --shadow: 0 1px 3px rgba(0,0,0,0.25);
+  --danger: #e06666; --danger-bg: #2d2020; --danger-border: #6a4040;
+  --warn: #d4a040; --warn-bg: #2d2818; --warn-border: #8a7020;
+  --info: #60a0d0; --info-bg: #1a2432; --info-border: #3a6090;
+  --green: #68b878; --green-bg: #1a2e1a; --green-border: #4a9050;
+  --tl-dot: #4a505c; --tl-hl: #61afef; --tl-wl: #d4a040;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+  transition:background var(--transition),color var(--transition);
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(80px + env(safe-area-inset-bottom, 0px));
+}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+.header{
+  background:var(--bg-card);border-bottom:1px solid var(--border);
+  padding:0 14px;position:sticky;top:0;z-index:100;
+  box-shadow:var(--shadow);display:flex;align-items:center;
+  justify-content:space-between;height:48px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.header-subtitle{font-size:10.5px;color:var(--text-muted);margin-left:8px;white-space:nowrap}
+.header-title{font-size:15px;font-weight:700;color:var(--accent);white-space:nowrap}
+.header-left{display:flex;align-items:center;gap:6px;min-width:0}
+.header-right{display:flex;align-items:center;gap:8px}
+.search-wrap{position:relative}
+.search-input{
+  width:150px;padding:6px 10px 6px 30px;border:1px solid var(--border);
+  border-radius:16px;font-size:13px;background:var(--bg);color:var(--text);
+  outline:none;transition:all var(--transition);
+}
+.search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);width:190px}
+.search-input::placeholder{color:var(--text-muted)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:12px}
+.theme-toggle{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
+  background:var(--bg);color:var(--text);cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all var(--transition);
+  flex-shrink:0;
+}
+
+.export-btn{
+  width:30px;height:30px;border-radius:50%;border:1px solid var(--border);
+  background:var(--bg);color:var(--text);cursor:pointer;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all var(--transition);
+  flex-shrink:0;
+}
+.export-btn:active{background:var(--accent);color:#fff}
+.export-btn.working{animation:pulse 0.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.summary-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.summary-chip{padding:5px 11px;border-radius:14px;font-size:11.5px;font-weight:600;background:var(--bg-secondary);color:var(--text-secondary)}
+.chip-accent{background:var(--accent-light);color:var(--accent)}
+.chip-danger{background:var(--danger-bg);color:var(--danger)}
+.chip-warn{background:var(--warn-bg);color:var(--warn)}
+.chip-green{background:var(--green-bg);color:var(--green)}
+
+.city-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden;
+}
+.city-card.hidden{display:none}
+
+.section-head{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:14px;padding:14px 16px;box-shadow:var(--shadow);
+}
+.section-head h3{font-size:14px;color:var(--accent);margin-bottom:4px}
+.section-head .sh-sub{font-size:12px;color:var(--text-muted)}
+
+.city-header{
+  padding:14px 16px;display:flex;align-items:center;gap:10px;
+  cursor:pointer;user-select:none;-webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.city-num{
+  width:40px;height:40px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex-shrink:0;
+}
+.city-milano .city-num{background:#1e2d3d;color:#61afef}
+.city-firenze .city-num{background:#20302e;color:#68b878}
+.city-roma .city-num{background:#202a30;color:#6098c0}
+.city-napoli .city-num{background:#2e2a18;color:#d4a040}
+.train-icon .city-num{background:#202030;color:#8090c0}
+.ticket-icon .city-num{background:#1e2d3d;color:#61afef}
+.pack-icon .city-num{background:#202e20;color:#68b878}
+
+.city-info{flex:1;min-width:0}
+.city-info .city-title{font-weight:700;font-size:14px}
+.city-info .city-sub{font-size:11.5px;color:var(--text-muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.city-meta{text-align:right;flex-shrink:0}
+.city-meta .city-train{font-size:12.5px;color:var(--accent);font-weight:600}
+.city-meta .city-nights{font-size:11px;color:var(--text-muted)}
+.city-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.3s;margin-left:2px}
+.city-card.open .city-arrow{transform:rotate(180deg)}
+.city-body{display:none;padding:0 16px 16px}
+.city-card.open .city-body{display:block}
+
+.info-box,.warn-box,.danger-box,.good-box{padding:9px 12px;border-radius:var(--radius-sm);margin-bottom:8px;font-size:12.5px}
+.info-box{background:var(--info-bg);border-left:3px solid var(--info)}
+.warn-box{background:var(--warn-bg);border-left:3px solid var(--warn-border)}
+.danger-box{background:var(--danger-bg);border-left:3px solid var(--danger)}
+.good-box{background:var(--green-bg);border-left:3px solid var(--green-border)}
+
+.timeline{position:relative;padding-left:20px;margin:8px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:2px;bottom:2px;width:2px;background:var(--border);border-radius:1px}
+.tl-item{
+  position:relative;margin-bottom:7px;padding:8px 10px;
+  background:var(--bg-secondary);border-radius:var(--radius-sm);
+}
+.tl-item:last-child{margin-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-17px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--tl-dot);border:2px solid var(--bg-card)}
+.tl-item.hl::before{background:var(--tl-hl);box-shadow:0 0 5px var(--accent-light)}
+.tl-item.wl::before{background:var(--tl-wl)}
+.tl-time{font-size:11px;color:var(--accent);font-weight:600;font-family:"SF Mono","Cascadia Code","Consolas",monospace}
+.tl-text{font-size:12.5px;margin-top:1px}
+.tl-note{font-size:11px;color:var(--text-muted);margin-top:1px}
+
+.dt-table{width:100%;font-size:12px;border-collapse:collapse;margin:6px 0}
+.dt-table td{padding:5px 7px;border-bottom:1px solid var(--border);vertical-align:top}
+.dt-table td:first-child{color:var(--text-muted);white-space:nowrap;width:64px}
+.dt-table tr:last-child td{border-bottom:none}
+
+.check-cat{margin-bottom:12px}
+.check-cat h4{font-size:12.5px;margin-bottom:6px;color:var(--text)}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.check-item{
+  display:flex;align-items:center;gap:7px;padding:6px 9px;
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);
+  font-size:12px;cursor:pointer;user-select:none;-webkit-user-select:none;
+  transition:all var(--transition);-webkit-tap-highlight-color:transparent;
+}
+.check-item:active{background:var(--bg-secondary)}
+.check-item.checked{opacity:0.5}
+.check-item.checked span:last-child{text-decoration:line-through}
+.check-box{
+  width:20px;height:20px;border-radius:4px;border:2px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);font-size:10px;color:#fff
+}
+.check-item.checked .check-box{background:var(--green);border-color:var(--green)}
+
+.budget-table{width:100%;font-size:13px;border-collapse:collapse}
+.budget-table td{padding:7px 8px;border-bottom:1px solid var(--border)}
+.budget-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--accent)}
+.budget-table td:last-child{text-align:right;font-weight:600}
+
+.bottom-nav{
+  position:fixed;bottom:16px;left:0;right:0;z-index:100;
+  margin:0 auto;
+  width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;
+  max-width:calc(100vw - 24px);
+  background:var(--bg-card);border:1px solid var(--border);
+  display:flex;overflow-x:auto;
+  padding:6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+  border-radius:24px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.18);
+  scrollbar-width:none;-ms-overflow-style:none;
+  -webkit-overflow-scrolling:touch;
+  justify-content:center;
+}
+.bottom-nav::-webkit-scrollbar{display:none}
+.nav-btn{
+  flex-shrink:0;padding:9px 16px;margin:0 3px;border-radius:20px;
+  border:none;background:var(--bg-secondary);color:var(--text-secondary);
+  font-size:13px;cursor:pointer;white-space:nowrap;font-weight:500;
+  transition:all var(--transition);font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-btn:active{background:var(--accent);color:#fff}
+
+.highlight{background:#ffeaa7;padding:0 1px;border-radius:2px;color:#2c323b}
+[data-theme="dark"] .highlight{background:#5a5018;color:#ffeaa7}
+.empty-state{text-align:center;padding:40px 16px;color:var(--text-muted)}
+.empty-icon{font-size:36px;margin-bottom:6px}
+
+.main{padding:14px;max-width:640px;margin:0 auto}
+@media(min-width:480px){.check-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:768px){.header{padding:0 20px}.main{padding:20px}.check-grid{grid-template-columns:repeat(4,1fr)}}
+@media print{.header,.bottom-nav,.search-wrap,.theme-toggle{display:none}body{background:#fff;color:#000}}
+</style>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body data-theme="dark">
+
+<div class="header">
+  <div class="header-left"><span class="header-title">🇮🇹 In cielo mi portò</span><span class="header-subtitle">意大利国庆之旅 · 2026.10</span></div>
+  <div class="header-right">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="globalSearch" placeholder="搜索...">
+    </div>
+    <button class="export-btn" id="exportBtn" title="导出长图" onclick="exportImage()">📷</button>
+    <button class="theme-toggle" id="themeToggle" title="切换主题">☾</button>
+  </div>
+</div>
+
+<div class="main" id="main"></div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn" onclick="jump('milano')">🇮🇹 米兰</button>
+  <button class="nav-btn" onclick="jump('firenze')">🎨 佛罗伦萨</button>
+  <button class="nav-btn" onclick="jump('roma')">🏛️ 罗马</button>
+  <button class="nav-btn" onclick="jump('napoli')">🍕 那不勒斯</button>
+  <button class="nav-btn" onclick="jump('trains')">🚄 火车</button>
+  <button class="nav-btn" onclick="jump('tickets')">🎫 门票</button>
+  <button class="nav-btn" onclick="jump('checklist')">🧳 行前</button>
+</nav>
+
+<script>
+var CITIES=[
+  {id:"milano",cls:"city-milano",icon:"🇮🇹",name:"米兰 Milano",sub:"入境门户 · 2天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 大教堂附近</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-warn">🍸 Brera aperitivo</span>',days:[
+    {label:"D1 · 9/26（抵达日）",timeline:[
+      {time:"全天",text:"✈️ 抵达米兰（马尔彭萨 MXP 或利纳特 LIN）",hl:1},
+      {time:"下午",text:"🚇 机场快线至市区（Malpensa Express ~50min）"},
+      {time:"下午",text:"🏨 入住酒店，稍作休整"},
+      {time:"傍晚",text:"⛪ 米兰大教堂外观 + 埃马努埃莱二世拱廊",note:"轻行程，不登顶"},
+      {time:"晚上",text:"🍝 布雷拉区晚餐 + aperitivo",hl:1},
+    ]},
+    {label:"D2 · 9/27（完整日）",timeline:[
+      {time:"09:00-11:00",text:"⛪ 米兰大教堂登顶天台",hl:1,note:"135座尖塔 + 3400+雕像，预留2h"},
+      {time:"11:00-12:00",text:"🎨 《最后的晚餐》",hl:1,note:"提前数月预约！每次限15-20分钟"},
+      {time:"12:00-14:00",text:"🍝 午餐 + 斯福尔扎城堡"},
+      {time:"14:00-16:00",text:"🏰 城堡内部（米开朗基罗《隆达尼尼圣殇》）"},
+      {time:"傍晚",text:"🛍️ 自由探索（Navigli运河区 或 Quadrilatero购物区）"},
+      {time:"晚上",text:"🍷 最后一晚米兰，好好吃一顿"},
+    ]}
+  ],warnings:[
+    {level:"danger",text:"🎫 《最后的晚餐》需提前2-3个月预约！周一闭馆。官网：cenacolovinciano.vivaticket.it"},
+    {level:"info",text:"大教堂登顶推荐步行（250级台阶），电梯需排队且贵一倍"},
+  ],details:[
+    ["机场→市区","Malpensa Express ~50min，€13"],
+    ["住宿区域","大教堂附近 或 中央车站附近"],
+    ["市内交通","地铁单次 €2.20，日票 €7.60"],
+    ["美食推荐","Risotto alla Milanese / Cotoletta / Panettone"],
+  ]},
+  {id:"firenze",cls:"city-firenze",icon:"🎨",name:"佛罗伦萨 Firenze",sub:"文艺复兴核心 · 2天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 百花大教堂附近</span><span class="summary-chip">🚶 全靠步行</span><span class="summary-chip chip-warn">🌅 米开朗基罗广场日落</span>',days:[
+    {label:"D3 · 9/28（移动日）",timeline:[
+      {time:"上午",text:"🚄 米兰→佛罗伦萨 Frecciarossa/Italo ~1.75h",hl:1,note:"提前买票 €30-60"},
+      {time:"下午",text:"🏨 入住 + 大教堂区探索"},
+      {time:"下午",text:"⛪ 圣母百花大教堂外观 + 洗礼堂 + 乔托钟楼"},
+      {time:"傍晚",text:"🌉 老桥散步",hl:1},
+      {time:"日落",text:"🌅 米开朗基罗广场看佛罗伦萨全景日落",hl:1},
+      {time:"晚上",text:"🍷 Oltrarno 区晚餐"},
+    ]},
+    {label:"D4 · 9/29（完整日）",timeline:[
+      {time:"08:30-12:00",text:"🎨 乌菲兹美术馆",hl:1,note:"波提切利/达芬奇/拉斐尔，提前预约"},
+      {time:"12:00-13:30",text:"🍝 午餐"},
+      {time:"13:30-15:30",text:"🗿 学院美术馆（《大卫》）",note:"或换成皮蒂宫/波波里花园"},
+      {time:"下午",text:"☕ Oltrarno 自由漫步"},
+      {time:"晚上",text:"🥩 Bistecca alla Fiorentina（佛罗伦萨牛排）",hl:1},
+    ]}
+  ],warnings:[
+    {level:"danger",text:"🎫 乌菲兹 + 学院美术馆需提前预约！旺季排队可超2小时。"},
+    {level:"warn",text:"如果只有2晚，学院美术馆和皮蒂宫二选一即可，不必赶。"},
+  ],details:[
+    ["米兰→佛罗伦萨","高铁 1.75-2h，€30-60"],
+    ["住宿区域","百花大教堂/SMN车站/老桥北岸"],
+    ["美食推荐","Bistecca / Lampredotto / Gelato"],
+    ["可选半日","比萨斜塔 或 锡耶纳（火车 ~1h）"],
+  ]},
+  {id:"roma",cls:"city-roma",icon:"🏛️",name:"罗马 Roma",sub:"古罗马 + 梵蒂冈 · 3天",nights:"3晚",summary:'<span class="summary-chip chip-accent">🏨 Termini/Monti</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-danger">⚠ 梵蒂冈着装要求</span>',days:[
+    {label:"D5 · 9/30（移动日）",timeline:[
+      {time:"上午",text:"🚄 佛罗伦萨→罗马 Frecciarossa ~1.5h",note:"提前买票 €25-50"},
+      {time:"下午",text:"🏨 入住 + 轻行程"},
+      {time:"傍晚",text:"⛲ 许愿池 → 万神殿（免费）",hl:1},
+      {time:"晚上",text:"🍝 Monti 区晚餐"},
+    ]},
+    {label:"D6 · 10/1（古罗马日）",timeline:[
+      {time:"08:30",text:"🏟️ 斗兽场（提前预约免排队）",hl:1},
+      {time:"上午",text:"🏛️ 古罗马广场 → 帕拉丁山（三合一联票）"},
+      {time:"下午",text:"🏛️ 卡比托利欧山 → 威尼斯广场"},
+      {time:"傍晚",text:"🛍️ 西班牙广场"},
+      {time:"晚上",text:"🍷 Trastevere 晚餐"},
+    ]},
+    {label:"D7 · 10/2（梵蒂冈日）",timeline:[
+      {time:"08:00",text:"🎨 梵蒂冈博物馆 + 西斯廷教堂",hl:1,note:"务必提前预约！周日闭馆"},
+      {time:"中午",text:"⛪ 圣彼得大教堂（免费）→ 登穹顶看全景"},
+      {time:"下午",text:"🏰 圣天使堡 → 纳沃纳广场"},
+      {time:"晚上",text:"🍝 罗马最后一晚"},
+    ]}
+  ],warnings:[
+    {level:"danger",text:"🎫 梵蒂冈博物馆提前1-2个月预约！周日闭馆。官网：museivaticani.va"},
+    {level:"danger",text:"⛪ 梵蒂冈有着装要求：膝盖和肩膀必须遮盖！短裤/吊带禁止入内。"},
+    {level:"info",text:"万神殿 2023 年起收费 €5，但仍值得去。"},
+  ],details:[
+    ["佛罗伦萨→罗马","高铁 ~1.5h，€25-50"],
+    ["住宿区域","Termini 车站附近 或 Monti 区"],
+    ["美食推荐","Cacio e Pepe / Carbonara / Supplì"],
+    ["联票","斗兽场+古罗马广场+帕拉丁山 三合一 ~€18"],
+  ]},
+  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 2-3天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 Centro Storico</span><span class="summary-chip">🚇 地铁+缆车</span><span class="summary-chip chip-danger">⚠ 火车站注意安全</span>',days:[
+    {label:"D8 · 10/3（移动日）",timeline:[
+      {time:"上午",text:"🚄 罗马→那不勒斯 Frecciarossa ~1h",hl:1,note:"每30分钟一班"},
+      {time:"下午",text:"🏨 入住 + 蛋堡 → 平民表决广场 → 翁贝托长廊"},
+      {time:"傍晚",text:"🏘️ 西班牙区穿巷漫步"},
+      {time:"晚上",text:"🍕 披萨朝圣！Da Michele 或 Sorbillo",hl:1},
+    ]},
+    {label:"D9 · 10/4（庞贝日）",timeline:[
+      {time:"08:00",text:"🚂 Circumvesuviana 火车→庞贝",hl:1,note:"30-45分钟"},
+      {time:"09:00-13:00",text:"🏛️ 庞贝遗址 3-4h",hl:1},
+      {time:"下午",text:"🚂 返回那不勒斯"},
+      {time:"日落",text:"⛰️ Vomero 山圣马蒂诺修道院看全景",hl:1},
+      {time:"晚上",text:"🍕 再吃一顿披萨！"},
+    ]},
+    {label:"D10 · 10/5（老城日）",timeline:[
+      {time:"上午",text:"🕊️ 圣塞维诺礼拜堂（《蒙纱的基督》）",hl:1,note:"务必提前预约！"},
+      {time:"上午",text:"🕳️ 那不勒斯地下城 Napoli Sotterranea"},
+      {time:"下午",text:"🎭 老城漫步 + 最后采购"},
+      {time:"傍晚",text:"🌊 海滨长廊最后一次看海"},
+      {time:"晚上",text:"🍝 告别晚餐"},
+    ]}
+  ],warnings:[
+    {level:"danger",text:"🎫 圣塞维诺礼拜堂必须提前预约！极其容易售罄。"},
+    {level:"danger",text:"🚨 那不勒斯中央火车站周边注意防盗！背包背前面。"},
+    {level:"info",text:"Da Michele 只卖 Margherita & Marinara 两种，排队很长但值得。"},
+  ],details:[
+    ["罗马→那不勒斯","高铁 ~1h，€12-20"],
+    ["那不勒斯→庞贝","Circumvesuviana 30-45min"],
+    ["住宿区域","Centro Storico 或 Chiaia 区"],
+    ["美食必试","Pizza / Sfogliatella / Babà / Cuoppo"],
+  ]}
+];
+var DEP={label:"D11 · 10/6 / D12 · 10/7（返程）",timeline:[
+  {time:"D11上午",text:"🕐 机动半天",note:"视航班时间安排"},
+  {time:"D11下午",text:"✈️ 那不勒斯/罗马出发回国"},
+  {time:"D12",text:"🏠 抵达杭州"},
+],warn:"若机票是10.7从意大利起飞，多出1天加给佛罗伦萨或罗马。"};
+var TRAINS=[
+  {route:"米兰 → 佛罗伦萨",time:"~1.75-2h",price:"€30-60",note:"Frecciarossa / Italo"},
+  {route:"佛罗伦萨 → 罗马",time:"~1.5h",price:"€25-50",note:"Frecciarossa / Italo"},
+  {route:"罗马 → 那不勒斯",time:"~1h",price:"€12-20",note:"每30分钟一班"},
+  {route:"那不勒斯 → 庞贝",time:"~30-45min",price:"€3-5",note:"Circumvesuviana 小火车"},
+  {route:"Malpensa → 米兰中央",time:"~50min",price:"€13",note:"Malpensa Express"},
+];
+var TICKETS=[
+  {name:"《最后的晚餐》",where:"米兰",lead:"提前2-3个月",note:"周一闭馆，每次限15-20分钟"},
+  {name:"乌菲兹美术馆",where:"佛罗伦萨",lead:"提前1-2个月",note:""},
+  {name:"学院美术馆",where:"佛罗伦萨",lead:"提前1-2个月",note:"《大卫》"},
+  {name:"斗兽场",where:"罗马",lead:"提前1-2个月",note:"三合一联票含古罗马广场+帕拉丁山"},
+  {name:"梵蒂冈博物馆",where:"罗马",lead:"提前1-2个月",note:"周日闭馆！含西斯廷教堂"},
+  {name:"圣塞维诺礼拜堂",where:"那不勒斯",lead:"提前1-2个月",note:"《蒙纱的基督》，极易售罄"},
+];
+var CHECKLIST=[
+  {name:"✈️ 机票 & 签证",items:["订国际机票（米兰进/罗马出优先）","申根签证（VFSGlobal预约）","旅行保险","护照有效期检查（>6个月）"]},
+  {name:"🎫 核心门票",items:["《最后的晚餐》","乌菲兹美术馆","学院美术馆","斗兽场联票","梵蒂冈博物馆+西斯廷","圣塞维诺礼拜堂"]},
+  {name:"🚄 交通",items:["米兰中央→佛罗伦萨 高铁票","佛罗伦萨→罗马 高铁票","罗马→那不勒斯 高铁票","下载 Trenitalia / Italo App","确认庞贝 Circumvesuviana 时刻"]},
+  {name:"👕 行李（10月初秋）",items:["舒适步行鞋（石板路多）","轻薄长袖+夹克","教堂着装：遮盖膝盖和肩膀","防盗斜挎包","折叠伞"]},
+  {name:"📱 出行必备",items:["Google Maps / 离线地图","翻译App（意大利语）","充电宝","欧洲转换插头（意标 Type L）","酒店+门票确认函打印/截图"]},
+  {name:"💊 药品 & 其他",items:["感冒药/肠胃药/创可贴","防晒霜","零钱欧元","护照复印件（分开存放）"]},
+];
+var BUDGET=[
+  ["国际机票（往返）","€700 - 1,200"],
+  ["住宿 10 晚","€900 - 1,700"],
+  ["火车票（3-4段高铁）","€90 - 170"],
+  ["餐饮（10天）","€300 - 500"],
+  ["门票","€100 - 220"],
+  ["合计","€2,090 - 3,790"],
+];
+var q='';
+
+function ms(o,s){if(!s||s.length<2)return true;s=s.toLowerCase();if(typeof o==='string')return o.toLowerCase().indexOf(s)!==-1;if(Array.isArray(o))return o.some(function(v){return ms(v,s);});if(typeof o==='object'&&o!==null)return Object.values(o).some(function(v){return ms(v,s);});return false}
+function hi(t,s){if(!s||s.length<2)return t;return t.replace(new RegExp('('+s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')+')','gi'),'<span class="highlight">$1</span>')}
+
+function rm(){document.querySelectorAll('.city-card,.section-head,.empty-state').forEach(function(e){e.remove()})}
+
+function buildAll(){
+  rm();
+  var main=document.getElementById('main');
+  main.innerHTML='<div class="summary-bar"><span class="summary-chip chip-accent">📅 9/25-10/7</span><span class="summary-chip chip-warn">🌤 初秋 15-22°C</span><span class="summary-chip chip-danger">🏨 10晚</span><span class="summary-chip">🇮🇹 4城</span><span class="summary-chip chip-green">🚄 全程高铁</span></div>';
+  var c=document.createElement('div');c.id='cc';main.appendChild(c);
+  var any=0;
+
+  var ro=document.createElement('div');ro.className='section-head';
+  ro.innerHTML='<h3>🗺️ 路线总览</h3><div class="sh-sub">米兰(2晚) → 佛罗伦萨(2晚) → 罗马(3晚) → 那不勒斯(2晚) → ✈️返程</div>';
+  if(!q||ms("路线路线总览米兰佛罗伦萨罗马那不勒斯",q))c.appendChild(ro);
+
+  CITIES.forEach(function(ct){
+    var card=document.createElement('div');
+    card.className='city-card open';card.id=ct.id;
+    var allTxt=[ct.name,ct.sub,ct.nights];
+    ct.days.forEach(function(d){allTxt.push(d.label);d.timeline.forEach(function(t){allTxt.push(t.text);allTxt.push(t.note||'')})});
+    ct.warnings.forEach(function(w){allTxt.push(w.text)});
+    ct.details.forEach(function(d){allTxt.push(d[0]);allTxt.push(d[1])});
+    if(q&&!ms(allTxt,q)){card.classList.add('hidden');c.appendChild(card);return;}
+    any=1;
+    var warns=ct.warnings.map(function(w){return'<div class="'+(w.level==='danger'?'danger-box':w.level==='warn'?'warn-box':'info-box')+'">'+hi(w.text,q)+'</div>'}).join('');
+    var daysHtml=ct.days.map(function(d){
+      var tl=d.timeline.map(function(t){return'<div class="tl-item'+(t.hl?' hl':'')+(t.wl?' wl':'')+'"><div class="tl-time">'+hi(t.time,q)+'</div><div class="tl-text">'+hi(t.text,q)+'</div>'+(t.note?'<div class="tl-note">'+hi(t.note,q)+'</div>':'')+'</div>'}).join('');
+      return'<div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:10px 0 4px;">'+hi(d.label,q)+'</div><div class="timeline">'+tl+'</div>';
+    }).join('');
+    var dets=ct.details.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('');
+    card.innerHTML='<div class="city-header" onclick="toggleCard(\''+ct.id+'\')"><div class="city-num">'+ct.icon+'</div><div class="city-info"><div class="city-title">'+hi(ct.name,q)+'</div><div class="city-sub">'+hi(ct.sub,q)+'</div></div><div class="city-meta"><div class="city-train">'+hi(ct.nights,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">'+ct.summary+'</p>'+warns+daysHtml+'<div style="font-weight:600;font-size:13px;margin:10px 0 4px;">📋 实用信息</div><table class="dt-table">'+dets+'</table></div>';
+    c.appendChild(card);
+  });
+
+  var dep=document.createElement('div');dep.className='city-card open';
+  if(q&&!ms("返程出发回国机动抵达杭州",q))dep.classList.add('hidden');else any=1;
+  dep.innerHTML='<div class="city-header" onclick="toggleCard(\'departure\')"><div class="city-num" style="background:#2e2e30;color:#8090c0">✈️</div><div class="city-info"><div class="city-title">'+hi(DEP.label,q)+'</div><div class="city-sub">返程</div></div><span class="city-arrow">▼</span></div><div class="city-body">'+(DEP.warn?'<div class="warn-box">'+hi(DEP.warn,q)+'</div>':'')+'<div class="timeline">'+DEP.timeline.map(function(t){return'<div class="tl-item'+(t.hl?' hl':'')+'"><div class="tl-time">'+hi(t.time,q)+'</div><div class="tl-text">'+hi(t.text,q)+'</div>'+(t.note?'<div class="tl-note">'+hi(t.note,q)+'</div>':'')+'</div>'}).join('')+'</div></div>';
+  c.appendChild(dep);
+
+  var tr=document.createElement('div');tr.className='city-card open';tr.id='trains';
+  var tq=q?TRAINS.filter(function(t){return ms(t.route,q)||ms(t.note,q)||ms(t.price,q)}):TRAINS;
+  if(q&&!tq.length)tr.classList.add('hidden');else any=1;
+  tr.innerHTML='<div class="city-header" onclick="toggleCard(\'trains\')"><div class="city-num train-icon">🚄</div><div class="city-info"><div class="city-title">火车规划</div><div class="city-sub">全程高铁串联 · 提前购票更便宜</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div class="good-box">💡 推荐下载 Trenitalia 和 Italo App；提前买票可省50%以上；当日买最贵。</div><table class="budget-table"><tr><td style="color:var(--text-muted);font-size:12px">区间</td><td style="color:var(--text-muted);font-size:12px">车程</td><td style="color:var(--text-muted);font-size:12px">票价</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.route,q)+'</td><td>'+hi(t.time,q)+'</td><td style="font-weight:600">'+hi(t.price,q)+'</td><td style="font-size:12px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
+  c.appendChild(tr);
+
+  var tk=document.createElement('div');tk.className='city-card open';tk.id='tickets';
+  var tkq=q?TICKETS.filter(function(t){return ms(t.name,q)||ms(t.where,q)||ms(t.note,q)||ms(t.lead,q)}):TICKETS;
+  if(q&&!tkq.length)tk.classList.add('hidden');else any=1;
+  tk.innerHTML='<div class="city-header" onclick="toggleCard(\'tickets\')"><div class="city-num ticket-icon">🎫</div><div class="city-info"><div class="city-title">门票预约清单</div><div class="city-sub">这些不提前约就进不去</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table"><tr><td style="color:var(--text-muted);font-size:12px">名称</td><td style="color:var(--text-muted);font-size:12px">城市</td><td style="color:var(--text-muted);font-size:12px">提前</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tkq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.name,q)+'</td><td>'+hi(t.where,q)+'</td><td style="color:var(--danger);font-weight:600">'+hi(t.lead,q)+'</td><td style="font-size:11.5px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
+  c.appendChild(tk);
+
+  var bg=document.createElement('div');bg.className='city-card open';
+  if(q&&!ms("预算机票住宿火车票餐饮门票合计",q))bg.classList.add('hidden');else any=1;
+  bg.innerHTML='<div class="city-header" onclick="toggleCard(\'budget\')"><div class="city-num" style="background:#202830;color:#60a0d0">💰</div><div class="city-info"><div class="city-title">预算参考（每人）</div><div class="city-sub">总计约 €2,090-3,790</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table">'+BUDGET.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('')+'</table></div>';
+  c.appendChild(bg);
+
+  var cl=document.createElement('div');cl.className='city-card open';cl.id='checklist';
+  var saved=JSON.parse(localStorage.getItem('italy_ck')||'{}');
+  var cats=CHECKLIST;
+  if(q){cats=cats.map(function(x){return{name:x.name,items:x.items.filter(function(i){return i.toLowerCase().indexOf(q)!==-1})}}).filter(function(x){return x.items.length>0||x.name.toLowerCase().indexOf(q)!==-1});}
+  if(q&&!cats.length)cl.classList.add('hidden');else any=1;
+  var ccats=cats.map(function(x){var t=x.items.length;var d=x.items.filter(function(i){return saved[i]}).length;return'<div class="check-cat"><h4>'+hi(x.name,q)+' <span style="font-size:11px;color:var(--text-muted);font-weight:400">'+d+'/'+t+'</span></h4><div class="check-grid">'+x.items.map(function(i){return'<div class="check-item'+(saved[i]?' checked':'')+'" onclick="toggleCheck(this,'+JSON.stringify(i)+')"><div class="check-box">'+(saved[i]?'✓':'')+'</div><span>'+hi(i,q)+'</span></div>'}).join('')+'</div></div>'}).join('');
+  cl.innerHTML='<div class="city-header" onclick="toggleCard(\'checklist\')"><div class="city-num pack-icon">🧳</div><div class="city-info"><div class="city-title">行前准备清单</div><div class="city-sub">点击打勾 · 进度自动保存</div></div><span class="city-arrow">▼</span></div><div class="city-body">'+ccats+'</div>';
+  c.appendChild(cl);
+
+  if(!any)c.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>没有匹配的内容</p></div>';
+}
+
+function toggleCard(id){var el=document.getElementById(id);if(el){el.classList.toggle('open');if(el.classList.contains('open'))el.scrollIntoView({behavior:'smooth',block:'start'})}}
+function jump(id){var el=document.getElementById(id);if(el){if(!el.classList.contains('open'))el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'start'})}}
+function toggleCheck(el,item){var s=JSON.parse(localStorage.getItem('italy_ck')||'{}');if(el.classList.contains('checked')){el.classList.remove('checked');el.querySelector('.check-box').textContent='';delete s[item]}else{el.classList.add('checked');el.querySelector('.check-box').textContent='✓';s[item]=true}localStorage.setItem('italy_ck',JSON.stringify(s));buildAll()}
+
+document.getElementById('globalSearch').addEventListener('input',function(e){q=e.target.value.trim().toLowerCase();buildAll()});
+document.getElementById('themeToggle').addEventListener('click',function(){var t=document.body.getAttribute('data-theme');var n=t==='dark'?'light':'dark';document.body.setAttribute('data-theme',n);localStorage.setItem('italy-theme',n);document.getElementById('themeToggle').textContent=n==='dark'?'☾':'☀'});
+(function(){var t=localStorage.getItem('italy-theme')||'dark';document.body.setAttribute('data-theme',t);document.getElementById('themeToggle').textContent=t==='dark'?'☾':'☀'})();
+
+buildAll();
+function exportImage(){
+  var btn = document.getElementById('exportBtn');
+  btn.classList.add('working');
+  btn.textContent = '⏳';
+
+  // Expand all cards
+  var allCards = document.querySelectorAll('.city-card');
+  var wasOpen = [];
+  allCards.forEach(function(c){ wasOpen.push(c.classList.contains('open')); c.classList.add('open'); });
+
+  // Hide chrome
+  var header = document.querySelector('.header');
+  var nav = document.querySelector('.bottom-nav');
+  var origHeader = header.style.display;
+  var origNav = nav.style.display;
+  header.style.display = 'none';
+  nav.style.display = 'none';
+
+  // Temporary padding fix
+  document.body.style.paddingBottom = '0';
+
+  setTimeout(function(){
+    var target = document.getElementById('main');
+    html2canvas(target, {
+      backgroundColor: getComputedStyle(document.body).getPropertyValue('--bg').trim() || '#1e2127',
+      scale: 2,
+      useCORS: true,
+      logging: false
+    }).then(function(canvas){
+      // Restore
+      header.style.display = origHeader;
+      nav.style.display = origNav;
+      document.body.style.paddingBottom = '';
+      allCards.forEach(function(c, i){ if(!wasOpen[i]) c.classList.remove('open'); });
+      btn.classList.remove('working');
+      btn.textContent = '📷';
+
+      // Download
+      var link = document.createElement('a');
+      link.download = '意大利国庆之旅_202610.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).catch(function(e){
+      header.style.display = origHeader;
+      nav.style.display = origNav;
+      document.body.style.paddingBottom = '';
+      allCards.forEach(function(c, i){ if(!wasOpen[i]) c.classList.remove('open'); });
+      btn.classList.remove('working');
+      btn.textContent = '📷';
+      alert('导出失败，请稍后重试');
+    });
+  }, 200);
+}
+
+</script>
+
+</body>
+</html>
