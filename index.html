@@ -327,7 +327,7 @@ var CITIES=[
     ["美食推荐","Cacio e Pepe / Carbonara / Supplì"],
     ["联票","斗兽场+古罗马广场+帕拉丁山 三合一 ~€18"],
   ]},
-  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 2-3天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 Centro Storico</span><span class="summary-chip">🚇 地铁+缆车</span><span class="summary-chip chip-danger">⚠ 火车站注意安全</span>',days:[
+  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 3天",nights:"3晚",summary:'<span class="summary-chip chip-accent">🏨 Centro Storico</span><span class="summary-chip">🚇 地铁+缆车</span><span class="summary-chip chip-danger">⚠ 火车站注意安全</span>',days:[
     {label:"D8 · 10/3（移动日）",timeline:[
       {time:"上午",text:"🚄 罗马→那不勒斯 Frecciarossa ~1h",hl:1,note:"每30分钟一班"},
       {time:"下午",text:"🏨 入住 + 蛋堡 → 平民表决广场 → 翁贝托长廊"},
@@ -423,7 +423,7 @@ function buildAll(){
   var any=0;
 
   var ro=document.createElement('div');ro.className='section-head';
-  ro.innerHTML='<h3>🗺️ 路线总览</h3><div class="sh-sub">米兰(2晚) → 佛罗伦萨(2晚) → 罗马(3晚) → 那不勒斯(2晚) → ✈️返程</div>';
+  ro.innerHTML='<h3>🗺️ 路线总览</h3><div class="sh-sub">米兰(2晚) → 佛罗伦萨(2晚) → 罗马(3晚) → 那不勒斯(3晚) → ✈️返程</div>';
   if(!q||ms("路线路线总览米兰佛罗伦萨罗马那不勒斯",q))c.appendChild(ro);
 
   // Flight day card
