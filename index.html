@@ -245,6 +245,7 @@ body{
 </nav>
 
 <script>
+var FLIGHT_DAY={id:"day0",label:"D0 · 9/25（出发日）",icon:"✈️",title:"杭州 → 深圳 → 米兰",sub:"HU7396 + HU7973 · 经深圳中转",body:'<div class="warn-box">⚠️ 深圳中转需提取行李重新托运（5h45m 足够）</div><div class="timeline"><div class="tl-item hl"><div class="tl-time">17:50</div><div class="tl-text">✈️ HU7396 杭州萧山 T3 出发</div></div><div class="tl-item"><div class="tl-time">20:05</div><div class="tl-text">📍 抵达深圳宝安 T3</div><div class="tl-note">中转 5h45m · 提行李重托运</div></div><div class="tl-item hl"><div class="tl-time">01:50 (+1)</div><div class="tl-text">✈️ HU7973 深圳起飞 → 米兰</div></div><div class="tl-item"><div class="tl-time">08:20 (9/26)</div><div class="tl-text">🛬 抵达米兰马尔彭萨 MXP T1</div></div></div>',details:[["航司","海南航空 Hainan Airlines"],["机型","待确认"],["行李","去程不直挂 / 回程直挂"]]};
 var CITIES=[
   {id:"milano",cls:"city-milano",icon:"🇮🇹",name:"米兰 Milano",sub:"入境门户 · 2天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 大教堂附近</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-warn">🍸 Brera aperitivo</span>',days:[
     {label:"D1 · 9/26（抵达日）",timeline:[
@@ -359,10 +360,10 @@ var CITIES=[
   ]}
 ];
 var DEP={label:"D11 · 10/6 / D12 · 10/7（返程）",timeline:[
-  {time:"D11上午",text:"🕐 机动半天",note:"视航班时间安排"},
-  {time:"D11下午",text:"✈️ 那不勒斯/罗马出发回国"},
-  {time:"D12",text:"🏠 抵达杭州"},
-],warn:"若机票是10.7从意大利起飞，多出1天加给佛罗伦萨或罗马。"};
+  {time:"D11 清晨",text:"🚄 那不勒斯→罗马高铁 ~1h（若 10/5 未到罗马）",note:"需在 ~8:15 前抵达 FCO"},
+  {time:"D11 10/6",text:"✈️ 罗马 FCO 11:15 起飞 HU438",hl:1},
+  {time:"D12 10/7",text:"🏠 深圳→杭州 10:40 抵达"},
+],warn:"10/6 中午从罗马起飞，回程当日无游玩时间。10/5 需住罗马或凌晨赶高铁。"};
 var TRAINS=[
   {route:"米兰 → 佛罗伦萨",time:"~1.75-2h",price:"€30-60",note:"Frecciarossa / Italo"},
   {route:"佛罗伦萨 → 罗马",time:"~1.5h",price:"€25-50",note:"Frecciarossa / Italo"},
@@ -394,6 +395,19 @@ var BUDGET=[
   ["门票","€100 - 220"],
   ["合计","€2,090 - 3,790"],
 ];
+var FLIGHTS={
+  outbound:[
+    {flight:"HU7396", date:"9/25", route:"杭州萧山 T3 → 深圳宝安 T3", time:"17:50 → 20:05"},
+    {flight:"——", date:"——", route:"深圳中转 · 5h45m", time:"⚠️ 行李不直挂"},
+    {flight:"HU7973", date:"9/26", route:"深圳宝安 T3 → 米兰 MXP T1", time:"01:50 → 08:20"},
+  ],
+  return:[
+    {flight:"HU438", date:"10/6", route:"罗马 FCO T3 → 深圳宝安 T3", time:"11:15 → (+1) 05:00"},
+    {flight:"——", date:"——", route:"深圳中转 · 3h35m", time:"行李直挂"},
+    {flight:"HU7393", date:"10/7", route:"深圳宝安 T3 → 杭州萧山 T3", time:"08:35 → 10:40"},
+  ],
+  note:"海南航空（Hainan Airlines）· 米兰进 / 罗马出"
+};
 var q='';
 
 function ms(o,s){if(!s||s.length<2)return true;s=s.toLowerCase();if(typeof o==='string')return o.toLowerCase().indexOf(s)!==-1;if(Array.isArray(o))return o.some(function(v){return ms(v,s);});if(typeof o==='object'&&o!==null)return Object.values(o).some(function(v){return ms(v,s);});return false}
@@ -411,6 +425,12 @@ function buildAll(){
   var ro=document.createElement('div');ro.className='section-head';
   ro.innerHTML='<h3>🗺️ 路线总览</h3><div class="sh-sub">米兰(2晚) → 佛罗伦萨(2晚) → 罗马(3晚) → 那不勒斯(2晚) → ✈️返程</div>';
   if(!q||ms("路线路线总览米兰佛罗伦萨罗马那不勒斯",q))c.appendChild(ro);
+
+  // Flight day card
+  var fd=document.createElement('div');fd.className='city-card open';fd.id='day0';
+  if(q&&!ms("杭州深圳出发米兰HU7396HU7973",q))fd.classList.add('hidden');else any=1;
+  fd.innerHTML='<div class="city-header" onclick="toggleCard(\'day0\')"><div class="city-num" style="background:#1e2d3d;color:#61afef">✈️</div><div class="city-info"><div class="city-title">'+hi(FLIGHT_DAY.title,q)+'</div><div class="city-sub">'+hi(FLIGHT_DAY.sub,q)+'</div></div><div class="city-meta"><div class="city-train">D0</div></div><span class="city-arrow">▼</span></div><div class="city-body"><p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">'+hi(FLIGHT_DAY.label,q)+'</p>'+FLIGHT_DAY.body+'<div style="font-weight:600;font-size:13px;margin:10px 0 4px;">📋 航班信息</div><table class="dt-table">'+FLIGHT_DAY.details.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('')+'</table></div>';
+  c.appendChild(fd);
 
   CITIES.forEach(function(ct){
     var card=document.createElement('div');
@@ -447,6 +467,11 @@ function buildAll(){
   if(q&&!tkq.length)tk.classList.add('hidden');else any=1;
   tk.innerHTML='<div class="city-header" onclick="toggleCard(\'tickets\')"><div class="city-num ticket-icon">🎫</div><div class="city-info"><div class="city-title">门票预约清单</div><div class="city-sub">这些不提前约就进不去</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table"><tr><td style="color:var(--text-muted);font-size:12px">名称</td><td style="color:var(--text-muted);font-size:12px">城市</td><td style="color:var(--text-muted);font-size:12px">提前</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tkq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.name,q)+'</td><td>'+hi(t.where,q)+'</td><td style="color:var(--danger);font-weight:600">'+hi(t.lead,q)+'</td><td style="font-size:11.5px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(tk);
+
+  var fl=document.createElement('div');fl.className='city-card open';fl.id='flights';
+  if(q&&!ms("航班机票海南深圳米兰罗马杭州",q))fl.classList.add('hidden');else any=1;
+  fl.innerHTML='<div class="city-header" onclick="toggleCard(\'flights\')"><div class="city-num" style="background:#202830;color:#60a0d0">✈️</div><div class="city-info"><div class="city-title">已订机票</div><div class="city-sub">'+hi(FLIGHTS.note,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:8px 0 4px;">🛫 去程</div><table class="budget-table">'+FLIGHTS.outbound.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td style="white-space:nowrap">'+hi(t.date,q)+'</td><td>'+hi(t.route,q)+'</td><td style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:12px 0 4px;">🛬 回程</div><table class="budget-table">'+FLIGHTS.return.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td style="white-space:nowrap">'+hi(t.date,q)+'</td><td>'+hi(t.route,q)+'</td><td style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table></div>';
+  c.appendChild(fl);
 
   var bg=document.createElement('div');bg.className='city-card open';
   if(q&&!ms("预算机票住宿火车票餐饮门票合计",q))bg.classList.add('hidden');else any=1;
