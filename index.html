@@ -6,35 +6,38 @@
 <title>In cielo mi portò · 意大利国庆之旅 2026.10</title>
 <style>
 :root {
-  --bg: #e8ecf1;
-  --bg-card: #f4f6f9;
-  --bg-secondary: #dde3ea;
-  --text: #2c323b;
+  --bg: #e9ece7;
+  --bg-card: #f8f6f0;
+  --bg-secondary: #e4e5dc;
+  --text: #2d332f;
   --text-secondary: #4b5563;
-  --text-muted: #8896a7;
-  --border: #c8d0da;
-  --accent: #3b75c4;
-  --accent-light: #e1ecf8;
-  --shadow: 0 1px 3px rgba(0,0,0,0.05);
+  --text-muted: #7d867d;
+  --border: #cfcfc3;
+  --accent: #2f6f8f;
+  --accent-light: #dbeaf0;
+  --accent-warm: #b85f45;
+  --accent-gold: #c7a348;
+  --shadow: 0 8px 28px rgba(45,51,47,0.08);
   --radius: 10px;
   --radius-sm: 6px;
   --transition: 0.2s ease;
-  --danger: #c44; --danger-bg: #fef0f0; --danger-border: #d8a0a0;
-  --warn: #c08030; --warn-bg: #fef9e7; --warn-border: #d4c060;
-  --info: #5090c0; --info-bg: #e8f0f8; --info-border: #90b8d8;
-  --green: #5a9860; --green-bg: #c8e6c9; --green-border: #66bb6a;
-  --tl-dot: #a0b0c0; --tl-hl: #3b75c4; --tl-wl: #c08030;
+  --danger: #b85f45; --danger-bg: #f6e7df; --danger-border: #d7a18e;
+  --warn: #a77b22; --warn-bg: #f7efd7; --warn-border: #d3b868;
+  --info: #2f6f8f; --info-bg: #dbeaf0; --info-border: #8bb4c4;
+  --green: #627b4f; --green-bg: #dfe9d6; --green-border: #8ca674;
+  --tl-dot: #9ba49b; --tl-hl: #2f6f8f; --tl-wl: #c7a348;
 }
 [data-theme="dark"] {
-  --bg: #1e2127; --bg-card: #252830; --bg-secondary: #2c3038;
-  --text: #c8ccd4; --text-secondary: #8b92a0; --text-muted: #5c6370;
-  --border: #373b44; --accent: #61afef; --accent-light: #1e2d3d;
-  --shadow: 0 1px 3px rgba(0,0,0,0.25);
-  --danger: #e06666; --danger-bg: #2d2020; --danger-border: #6a4040;
-  --warn: #d4a040; --warn-bg: #2d2818; --warn-border: #8a7020;
-  --info: #60a0d0; --info-bg: #1a2432; --info-border: #3a6090;
-  --green: #68b878; --green-bg: #1a2e1a; --green-border: #4a9050;
-  --tl-dot: #4a505c; --tl-hl: #61afef; --tl-wl: #d4a040;
+  --bg: #171c1f; --bg-card: #22282b; --bg-secondary: #2b3132;
+  --text: #e4e0d4; --text-secondary: #b6b8ad; --text-muted: #8f988f;
+  --border: #3a4242; --accent: #7ab7cf; --accent-light: #203743;
+  --accent-warm: #d58a6d; --accent-gold: #d6b75b;
+  --shadow: 0 12px 34px rgba(0,0,0,0.28);
+  --danger: #d58a6d; --danger-bg: #33241f; --danger-border: #7d4d3f;
+  --warn: #d6b75b; --warn-bg: #302b1b; --warn-border: #8e7330;
+  --info: #7ab7cf; --info-bg: #1c2d35; --info-border: #4f7e8f;
+  --green: #9bb782; --green-bg: #202d20; --green-border: #617d50;
+  --tl-dot: #586160; --tl-hl: #7ab7cf; --tl-wl: #d6b75b;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{
@@ -49,7 +52,7 @@ body{
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
 .header{
-  background:var(--bg-card);border-bottom:1px solid var(--border);
+  background:color-mix(in srgb, var(--bg-card) 88%, transparent);border-bottom:1px solid var(--border);
   padding:0 14px;position:sticky;top:0;z-index:100;
   box-shadow:var(--shadow);display:flex;align-items:center;
   justify-content:space-between;height:48px;
@@ -84,12 +87,32 @@ body{
 .export-btn:active{background:var(--accent);color:#fff}
 .export-btn.working{animation:pulse 0.8s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.summary-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
-.summary-chip{padding:5px 11px;border-radius:14px;font-size:11.5px;font-weight:600;background:var(--bg-secondary);color:var(--text-secondary)}
+.trip-dashboard{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:15px 16px;margin-bottom:14px;overflow:hidden;
+}
+.dash-eyebrow{font-size:11px;color:var(--accent-gold);font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
+.dash-title{font-size:20px;line-height:1.22;font-weight:850;color:var(--text);margin-bottom:3px}
+.dash-sub{font-size:12.5px;color:var(--text-muted);margin-bottom:12px}
+.summary-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:12px}
+.summary-chip{padding:8px 10px;border-radius:9px;font-size:12px;font-weight:700;background:var(--bg-secondary);color:var(--text-secondary);min-width:0}
 .chip-accent{background:var(--accent-light);color:var(--accent)}
 .chip-danger{background:var(--danger-bg);color:var(--danger)}
 .chip-warn{background:var(--warn-bg);color:var(--warn)}
 .chip-green{background:var(--green-bg);color:var(--green)}
+.route-strip{
+  display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;
+  padding:2px 0 10px;margin-bottom:10px;-webkit-overflow-scrolling:touch;
+}
+.route-strip::-webkit-scrollbar{display:none}
+.route-stop{flex:0 0 auto;padding:6px 9px;border-radius:999px;background:var(--bg-secondary);border:1px solid var(--border);font-size:12px;font-weight:700;color:var(--text-secondary)}
+.route-arrow{flex:0 0 auto;color:var(--text-muted);font-size:12px}
+.priority-panel{display:grid;gap:6px}
+.priority-title{font-size:12px;color:var(--text-muted);font-weight:700;margin-bottom:1px}
+.priority-item{display:flex;gap:8px;align-items:flex-start;padding:8px 9px;border-radius:8px;background:var(--warn-bg);border:1px solid color-mix(in srgb, var(--warn-border) 55%, transparent);font-size:12px;color:var(--text-secondary)}
+.priority-item strong{color:var(--warn);font-weight:800}
+.search-status{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--accent-light);color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 30%, transparent);border-radius:9px;padding:8px 10px;margin-bottom:12px;font-size:12px;font-weight:700}
+.search-clear{border:0;border-radius:999px;background:var(--bg-card);color:var(--accent);font:inherit;font-size:12px;font-weight:800;padding:4px 9px;cursor:pointer}
 
 .city-card{
   background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
@@ -105,7 +128,7 @@ body{
 .section-head .sh-sub{font-size:12px;color:var(--text-muted)}
 
 .city-header{
-  padding:14px 16px;display:flex;align-items:center;gap:10px;
+  padding:13px 15px;display:flex;align-items:center;gap:10px;
   cursor:pointer;user-select:none;-webkit-user-select:none;
   -webkit-tap-highlight-color:transparent;
 }
@@ -122,8 +145,10 @@ body{
 .pack-icon .city-num{background:#202e20;color:#68b878}
 
 .city-info{flex:1;min-width:0}
-.city-info .city-title{font-weight:700;font-size:14px}
-.city-info .city-sub{font-size:11.5px;color:var(--text-muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.city-info .city-title{font-weight:800;font-size:15px}
+.city-info .city-sub{font-size:12px;color:var(--text-muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.city-status{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.status-pill{font-size:10.5px;line-height:1;padding:4px 6px;border-radius:999px;background:var(--bg-secondary);color:var(--text-muted);font-weight:700}
 .city-meta{text-align:right;flex-shrink:0}
 .city-meta .city-train{font-size:12.5px;color:var(--accent);font-weight:600}
 .city-meta .city-nights{font-size:11px;color:var(--text-muted)}
@@ -131,6 +156,7 @@ body{
 .city-card.open .city-arrow{transform:rotate(180deg)}
 .city-body{display:none;padding:0 16px 16px}
 .city-card.open .city-body{display:block}
+.city-summary{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 
 .info-box,.warn-box,.danger-box,.good-box{padding:9px 12px;border-radius:var(--radius-sm);margin-bottom:8px;font-size:12.5px}
 .info-box{background:var(--info-bg);border-left:3px solid var(--info)}
@@ -140,6 +166,9 @@ body{
 
 .timeline{position:relative;padding-left:20px;margin:8px 0}
 .timeline::before{content:'';position:absolute;left:6px;top:2px;bottom:2px;width:2px;background:var(--border);border-radius:1px}
+.day-head{display:flex;align-items:center;gap:8px;margin:12px 0 6px}
+.day-badge{flex:0 0 auto;min-width:36px;text-align:center;padding:5px 7px;border-radius:8px;background:var(--accent-light);color:var(--accent);font-weight:850;font-size:12px}
+.day-meta{font-size:13px;color:var(--text);font-weight:750}
 .tl-item{
   position:relative;margin-bottom:7px;padding:8px 10px;
   background:var(--bg-secondary);border-radius:var(--radius-sm);
@@ -148,9 +177,9 @@ body{
 .tl-item::before{content:'';position:absolute;left:-17px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--tl-dot);border:2px solid var(--bg-card)}
 .tl-item.hl::before{background:var(--tl-hl);box-shadow:0 0 5px var(--accent-light)}
 .tl-item.wl::before{background:var(--tl-wl)}
-.tl-time{font-size:11px;color:var(--accent);font-weight:600;font-family:"SF Mono","Cascadia Code","Consolas",monospace}
-.tl-text{font-size:12.5px;margin-top:1px}
-.tl-note{font-size:11px;color:var(--text-muted);margin-top:1px}
+.tl-time{font-size:11.5px;color:var(--accent);font-weight:700;font-family:"SF Mono","Cascadia Code","Consolas",monospace}
+.tl-text{font-size:13.5px;margin-top:1px}
+.tl-note{font-size:12px;color:var(--text-muted);margin-top:1px}
 
 .dt-table{width:100%;font-size:12px;border-collapse:collapse;margin:6px 0}
 .dt-table td{padding:5px 7px;border-bottom:1px solid var(--border);vertical-align:top}
@@ -178,7 +207,8 @@ body{
 
 .budget-table{width:100%;font-size:13px;border-collapse:collapse}
 .budget-table td{padding:7px 8px;border-bottom:1px solid var(--border)}
-.budget-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--accent)}
+.budget-table tr:last-child td{border-bottom:none}
+.budget-table.total-table tr:last-child td{font-weight:700;color:var(--accent)}
 .budget-table td:last-child{text-align:right;font-weight:600}
 
 .bottom-nav{
@@ -197,22 +227,36 @@ body{
 }
 .bottom-nav::-webkit-scrollbar{display:none}
 .nav-btn{
-  flex-shrink:0;padding:9px 16px;margin:0 3px;border-radius:20px;
+  flex-shrink:0;padding:10px 15px;margin:0 3px;border-radius:20px;
   border:none;background:var(--bg-secondary);color:var(--text-secondary);
   font-size:13px;cursor:pointer;white-space:nowrap;font-weight:500;
   transition:all var(--transition);font-family:inherit;
   -webkit-tap-highlight-color:transparent;
 }
 .nav-btn:active{background:var(--accent);color:#fff}
+.nav-divider{width:1px;background:var(--border);margin:5px 5px;flex:0 0 auto}
 
 .highlight{background:#ffeaa7;padding:0 1px;border-radius:2px;color:#2c323b}
 [data-theme="dark"] .highlight{background:#5a5018;color:#ffeaa7}
 .empty-state{text-align:center;padding:40px 16px;color:var(--text-muted)}
 .empty-icon{font-size:36px;margin-bottom:6px}
 
-.main{padding:14px;max-width:640px;margin:0 auto}
+.main{padding:14px;max-width:680px;margin:0 auto}
 @media(min-width:480px){.check-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:768px){.header{padding:0 20px}.main{padding:20px}.check-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:480px){
+  .header-subtitle{display:none}
+  .header-title{font-size:14px;max-width:132px;overflow:hidden;text-overflow:ellipsis}
+  .search-input{width:118px}
+  .search-input:focus{width:130px}
+  .stacked-table,.stacked-table tbody,.stacked-table tr,.stacked-table td{display:block;width:100%}
+  .stacked-table tr{background:var(--bg-secondary);border:1px solid var(--border);border-radius:9px;margin:7px 0;padding:7px 8px}
+  .stacked-table tr.table-head{display:none}
+  .stacked-table td{border:0;padding:2px 0;text-align:left!important}
+  .stacked-table td[data-label]::before{content:attr(data-label) "：";color:var(--text-muted);font-weight:600}
+  .stacked-table td:first-child{font-size:13.5px;color:var(--text);font-weight:800}
+  .stacked-table td:first-child::before{content:""}
+}
 @media print{.header,.bottom-nav,.search-wrap,.theme-toggle{display:none}body{background:#fff;color:#000}}
 </style>
 
@@ -239,6 +283,7 @@ body{
   <button class="nav-btn" onclick="jump('firenze')">🎨 佛罗伦萨</button>
   <button class="nav-btn" onclick="jump('napoli')">🍕 那不勒斯</button>
   <button class="nav-btn" onclick="jump('roma')">🏛️ 罗马</button>
+  <span class="nav-divider"></span>
   <button class="nav-btn" onclick="jump('trains')">🚄 火车</button>
   <button class="nav-btn" onclick="jump('tickets')">🎫 门票</button>
   <button class="nav-btn" onclick="jump('checklist')">🧳 行前</button>
@@ -247,7 +292,7 @@ body{
 <script>
 var FLIGHT_DAY={id:"day0",label:"D0 · 9/25（出发日）",icon:"✈️",title:"杭州 → 深圳 → 米兰",sub:"HU7396 + HU7973 · 经深圳中转",body:'<div class="warn-box">⚠️ 深圳中转需提取行李重新托运（5h45m 足够）</div><div class="timeline"><div class="tl-item hl"><div class="tl-time">17:50</div><div class="tl-text">✈️ HU7396 杭州萧山 T3 出发</div></div><div class="tl-item"><div class="tl-time">20:05</div><div class="tl-text">📍 抵达深圳宝安 T3</div><div class="tl-note">中转 5h45m · 提行李重托运</div></div><div class="tl-item hl"><div class="tl-time">01:50 (+1)</div><div class="tl-text">✈️ HU7973 深圳起飞 → 米兰</div></div><div class="tl-item"><div class="tl-time">08:20 (9/26)</div><div class="tl-text">🛬 抵达米兰马尔彭萨 MXP T1</div></div></div>',details:[["航司","海南航空 Hainan Airlines"],["机型","待确认"],["行李","去程不直挂 / 回程直挂"]]};
 var CITIES=[
-  {id:"milano",cls:"city-milano",icon:"🇮🇹",name:"米兰 Milano",sub:"入境门户 · 3天",nights:"3晚",summary:'<span class="summary-chip chip-accent">🏨 大教堂附近</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-warn">🍸 Brera aperitivo</span>',days:[
+  {id:"milano",cls:"city-milano",icon:"🇮🇹",name:"米兰 Milano",sub:"入境门户 · 3天",nights:"3晚",status:["3晚","1个必抢预约","机场快线","地铁+步行"],summary:'<span class="summary-chip chip-accent">🏨 大教堂附近</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-warn">🍸 Brera aperitivo</span>',days:[
     {label:"D1 · 9/26（抵达日）",timeline:[
       {time:"08:20",text:"✈️ 落地米兰 MXP，入境 + Malpensa Express 至市区 ~50min",hl:1},
       {time:"下午",text:"🏨 入住 + 倒时差"},
@@ -275,7 +320,7 @@ var CITIES=[
     ["市内交通","地铁单次 €2.20，日票 €7.60"],
     ["美食推荐","Risotto alla Milanese / Cotoletta / Panettone"],
   ]},
-  {id:"firenze",cls:"city-firenze",icon:"🎨",name:"佛罗伦萨 Firenze",sub:"文艺复兴核心 · 2天",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 百花大教堂附近</span><span class="summary-chip">🚶 全靠步行</span><span class="summary-chip chip-warn">🌅 米开朗基罗广场日落</span>',days:[
+  {id:"firenze",cls:"city-firenze",icon:"🎨",name:"佛罗伦萨 Firenze",sub:"文艺复兴核心 · 2天",nights:"2晚",status:["2晚","2个美术馆预约","高铁抵达","全靠步行"],summary:'<span class="summary-chip chip-accent">🏨 百花大教堂附近</span><span class="summary-chip">🚶 全靠步行</span><span class="summary-chip chip-warn">🌅 米开朗基罗广场日落</span>',days:[
     {label:"D4 · 9/29（移动日）",timeline:[
       {time:"上午",text:"🚄 米兰→佛罗伦萨 Frecciarossa/Italo ~1.75h",hl:1,note:"提前买票 €30-60 · 建议班次 9:00-10:00"},
       {time:"下午",text:"🏨 入住 + 圣母百花大教堂区探索"},
@@ -298,7 +343,7 @@ var CITIES=[
     ["美食推荐","Bistecca / Lampredotto / Gelato"],
     ["可选半日","比萨斜塔 或 锡耶纳（火车 ~1h）"],
   ]},
-  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 2晚",nights:"2晚",summary:'<span class="summary-chip chip-accent">🏨 Centro Storico/Chiaia</span><span class="summary-chip">🚇 地铁+小火车</span><span class="summary-chip chip-warn">🍕 2晚更从容</span>',days:[
+  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 2晚",nights:"2晚",status:["2晚","圣塞维诺+庞贝","长高铁日","注意防盗"],summary:'<span class="summary-chip chip-accent">🏨 Centro Storico/Chiaia</span><span class="summary-chip">🚇 地铁+小火车</span><span class="summary-chip chip-warn">🍕 2晚更从容</span>',days:[
     {label:"D6 · 10/1（周四 · 南下日）",timeline:[
       {time:"上午",text:"🚄 佛罗伦萨→那不勒斯 Centrale ~2.75-3h",hl:1,note:"建议班次 8:30-9:30，经停罗马但不入住"},
       {time:"下午",text:"🏨 入住/寄存 + Spaccanapoli、Via dei Tribunali 老城漫步"},
@@ -321,7 +366,7 @@ var CITIES=[
     ["住宿区域","Centro Storico / Chiaia / Napoli Centrale 周边优先看安全和交通"],
     ["美食必试","Pizza / Sfogliatella / Babà / Cuoppo"],
   ]},
-  {id:"roma",cls:"city-roma",icon:"🏛️",name:"罗马 Roma",sub:"古罗马 + 梵蒂冈 · 3晚收尾",nights:"3晚",summary:'<span class="summary-chip chip-accent">🏨 Termini/Monti/Prati</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-danger">⚠ 梵蒂冈着装要求</span>',days:[
+  {id:"roma",cls:"city-roma",icon:"🏛️",name:"罗马 Roma",sub:"古罗马 + 梵蒂冈 · 3晚收尾",nights:"3晚",status:["3晚收尾","斗兽场+梵蒂冈","机场从容","地铁+步行"],summary:'<span class="summary-chip chip-accent">🏨 Termini/Monti/Prati</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-danger">⚠ 梵蒂冈着装要求</span>',days:[
     {label:"D8 · 10/3（周六 · 抵达罗马）",timeline:[
       {time:"上午",text:"🚄 那不勒斯→罗马 Termini ~1h",hl:1,note:"建议班次 9:00-10:00"},
       {time:"下午",text:"🏨 入住/寄存 + 许愿池 → 万神殿 → 纳沃纳广场 → 鲜花广场",hl:1},
@@ -406,27 +451,32 @@ function ms(o,s){if(!s||s.length<2)return true;s=s.toLowerCase();if(typeof o==='
 function hi(t,s){if(!s||s.length<2)return t;return t.replace(new RegExp('('+s.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')+')','gi'),'<span class="highlight">$1</span>')}
 
 function rm(){document.querySelectorAll('.city-card,.section-head,.empty-state').forEach(function(e){e.remove()})}
+function dayHead(label){
+  var p=label.split('·');
+  var d=(p[0]||'').trim();
+  var rest=p.slice(1).join('·').trim();
+  return '<div class="day-head"><div class="day-badge">'+hi(d,q)+'</div><div class="day-meta">'+hi(rest,q)+'</div></div>';
+}
+function tripDashboard(){
+  return '<section class="trip-dashboard"><div class="dash-eyebrow">Italy 2026</div><div class="dash-title">意大利国庆之旅</div><div class="dash-sub">米兰进 / 罗马出，把罗马放在最后连续收尾。</div><div class="summary-bar"><span class="summary-chip chip-accent">📅 9/25-10/7</span><span class="summary-chip chip-warn">🏨 4城10晚</span><span class="summary-chip chip-green">🚄 高铁串联</span><span class="summary-chip">✈️ 米兰进罗马出</span></div><div class="route-strip"><span class="route-stop">杭州</span><span class="route-arrow">→</span><span class="route-stop">深圳</span><span class="route-arrow">→</span><span class="route-stop">米兰</span><span class="route-arrow">→</span><span class="route-stop">佛罗伦萨</span><span class="route-arrow">→</span><span class="route-stop">那不勒斯</span><span class="route-arrow">→</span><span class="route-stop">罗马</span><span class="route-arrow">→</span><span class="route-stop">杭州</span></div><div class="priority-panel"><div class="priority-title">优先锁定</div><div class="priority-item"><span>🎫</span><span><strong>先抢预约：</strong>《最后的晚餐》、乌菲兹、学院美术馆、圣塞维诺、斗兽场、梵蒂冈。</span></div><div class="priority-item"><span>🚄</span><span><strong>先买高铁：</strong>米兰→佛罗伦萨、佛罗伦萨→那不勒斯、那不勒斯→罗马。</span></div></div></section>';
+}
 
 function buildAll(){
   rm();
   var main=document.getElementById('main');
-  main.innerHTML='<div class="summary-bar"><span class="summary-chip chip-accent">📅 9/25-10/7</span><span class="summary-chip chip-warn">🌤 初秋 15-22°C</span><span class="summary-chip chip-danger">🏨 10晚</span><span class="summary-chip">🇮🇹 4城</span><span class="summary-chip chip-green">🚄 全程高铁</span><span class="summary-chip">🎫 机票已购</span></div>';
+  main.innerHTML=tripDashboard()+(q?'<div class="search-status"><span>正在搜索：'+hi(q,q)+'</span><button class="search-clear" onclick="clearSearch()">清除</button></div>':'');
   var c=document.createElement('div');c.id='cc';main.appendChild(c);
   var any=0;
 
-  var ro=document.createElement('div');ro.className='section-head';
-  ro.innerHTML='<h3>🗺️ 路线总览</h3><div class="sh-sub">米兰(3晚) → 佛罗伦萨(2晚) → 那不勒斯(2晚) → 罗马(3晚) → ✈️返程</div>';
-  if(!q||ms("路线路线总览米兰佛罗伦萨罗马那不勒斯返程",q))c.appendChild(ro);
-
   // Flight day card
-  var fd=document.createElement('div');fd.className='city-card open';fd.id='day0';
+  var fd=document.createElement('div');fd.className='city-card'+(q?' open':'');fd.id='day0';
   if(q&&!ms("杭州深圳出发米兰HU7396HU7973D0",q))fd.classList.add('hidden');else any=1;
   fd.innerHTML='<div class="city-header" onclick="toggleCard(\'day0\')"><div class="city-num" style="background:#1e2d3d;color:#61afef">✈️</div><div class="city-info"><div class="city-title">'+hi(FLIGHT_DAY.title,q)+'</div><div class="city-sub">'+hi(FLIGHT_DAY.sub,q)+'</div></div><div class="city-meta"><div class="city-train">D0</div></div><span class="city-arrow">▼</span></div><div class="city-body"><p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">'+hi(FLIGHT_DAY.label,q)+'</p>'+FLIGHT_DAY.body+'<div style="font-weight:600;font-size:13px;margin:10px 0 4px;">📋 航班信息</div><table class="dt-table">'+FLIGHT_DAY.details.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(fd);
 
   CITIES.forEach(function(ct){
     var card=document.createElement('div');
-    card.className='city-card open';card.id=ct.id;
+    card.className='city-card '+ct.cls+((ct.id==='milano'||q)?' open':'');card.id=ct.id;
     var allTxt=[ct.name,ct.sub,ct.nights];
     ct.days.forEach(function(d){allTxt.push(d.label);d.timeline.forEach(function(t){allTxt.push(t.text);allTxt.push(t.note||'')})});
     ct.warnings.forEach(function(w){allTxt.push(w.text)});
@@ -436,41 +486,42 @@ function buildAll(){
     var warns=ct.warnings.map(function(w){return'<div class="'+(w.level==='danger'?'danger-box':w.level==='warn'?'warn-box':'info-box')+'">'+hi(w.text,q)+'</div>'}).join('');
     var daysHtml=ct.days.map(function(d){
       var tl=d.timeline.map(function(t){return'<div class="tl-item'+(t.hl?' hl':'')+(t.wl?' wl':'')+'"><div class="tl-time">'+hi(t.time,q)+'</div><div class="tl-text">'+hi(t.text,q)+'</div>'+(t.note?'<div class="tl-note">'+hi(t.note,q)+'</div>':'')+'</div>'}).join('');
-      return'<div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:10px 0 4px;">'+hi(d.label,q)+'</div><div class="timeline">'+tl+'</div>';
+      return dayHead(d.label)+'<div class="timeline">'+tl+'</div>';
     }).join('');
     var dets=ct.details.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('');
-    card.innerHTML='<div class="city-header" onclick="toggleCard(\''+ct.id+'\')"><div class="city-num">'+ct.icon+'</div><div class="city-info"><div class="city-title">'+hi(ct.name,q)+'</div><div class="city-sub">'+hi(ct.sub,q)+'</div></div><div class="city-meta"><div class="city-train">'+hi(ct.nights,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">'+ct.summary+'</p>'+warns+daysHtml+'<div style="font-weight:600;font-size:13px;margin:10px 0 4px;">📋 实用信息</div><table class="dt-table">'+dets+'</table></div>';
+    var status=(ct.status||[]).map(function(s){return'<span class="status-pill">'+hi(s,q)+'</span>'}).join('');
+    card.innerHTML='<div class="city-header" onclick="toggleCard(\''+ct.id+'\')"><div class="city-num">'+ct.icon+'</div><div class="city-info"><div class="city-title">'+hi(ct.name,q)+'</div><div class="city-sub">'+hi(ct.sub,q)+'</div><div class="city-status">'+status+'</div></div><div class="city-meta"><div class="city-train">'+hi(ct.nights,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div class="city-summary">'+ct.summary+'</div>'+warns+daysHtml+'<div style="font-weight:600;font-size:13px;margin:10px 0 4px;">📋 实用信息</div><table class="dt-table">'+dets+'</table></div>';
     c.appendChild(card);
   });
 
-  var dep=document.createElement('div');dep.className='city-card open';
+  var dep=document.createElement('div');dep.className='city-card'+(q?' open':'');dep.id='departure';
   if(q&&!ms("返程出发回国机动抵达杭州",q))dep.classList.add('hidden');else any=1;
   dep.innerHTML='<div class="city-header" onclick="toggleCard(\'departure\')"><div class="city-num" style="background:#2e2e30;color:#8090c0">✈️</div><div class="city-info"><div class="city-title">'+hi(DEP.label,q)+'</div><div class="city-sub">返程</div></div><span class="city-arrow">▼</span></div><div class="city-body">'+(DEP.warn?'<div class="warn-box">'+hi(DEP.warn,q)+'</div>':'')+'<div class="timeline">'+DEP.timeline.map(function(t){return'<div class="tl-item'+(t.hl?' hl':'')+'"><div class="tl-time">'+hi(t.time,q)+'</div><div class="tl-text">'+hi(t.text,q)+'</div>'+(t.note?'<div class="tl-note">'+hi(t.note,q)+'</div>':'')+'</div>'}).join('')+'</div></div>';
   c.appendChild(dep);
 
-  var tr=document.createElement('div');tr.className='city-card open';tr.id='trains';
+  var tr=document.createElement('div');tr.className='city-card'+(q?' open':'');tr.id='trains';
   var tq=q?TRAINS.filter(function(t){return ms(t.route,q)||ms(t.note,q)||ms(t.price,q)}):TRAINS;
   if(q&&!tq.length)tr.classList.add('hidden');else any=1;
-  tr.innerHTML='<div class="city-header" onclick="toggleCard(\'trains\')"><div class="city-num train-icon">🚄</div><div class="city-info"><div class="city-title">火车规划</div><div class="city-sub">全程高铁串联 · 提前购票更便宜</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div class="good-box">💡 推荐下载 Trenitalia 和 Italo App；提前买票可省50%以上；当日买最贵。</div><table class="budget-table"><tr><td style="color:var(--text-muted);font-size:12px">区间</td><td style="color:var(--text-muted);font-size:12px">车程</td><td style="color:var(--text-muted);font-size:12px">票价</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.route,q)+'</td><td>'+hi(t.time,q)+'</td><td style="font-weight:600">'+hi(t.price,q)+'</td><td style="font-size:12px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
+  tr.innerHTML='<div class="city-header" onclick="toggleCard(\'trains\')"><div class="city-num train-icon">🚄</div><div class="city-info"><div class="city-title">火车规划</div><div class="city-sub">全程高铁串联 · 提前购票更便宜</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div class="good-box">💡 推荐下载 Trenitalia 和 Italo App；提前买票可省50%以上；当日买最贵。</div><table class="budget-table stacked-table"><tr class="table-head"><td style="color:var(--text-muted);font-size:12px">区间</td><td style="color:var(--text-muted);font-size:12px">车程</td><td style="color:var(--text-muted);font-size:12px">票价</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.route,q)+'</td><td data-label="车程">'+hi(t.time,q)+'</td><td data-label="票价" style="font-weight:600">'+hi(t.price,q)+'</td><td data-label="备注" style="font-size:12px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(tr);
 
-  var tk=document.createElement('div');tk.className='city-card open';tk.id='tickets';
+  var tk=document.createElement('div');tk.className='city-card'+(q?' open':'');tk.id='tickets';
   var tkq=q?TICKETS.filter(function(t){return ms(t.name,q)||ms(t.where,q)||ms(t.note,q)||ms(t.lead,q)}):TICKETS;
   if(q&&!tkq.length)tk.classList.add('hidden');else any=1;
-  tk.innerHTML='<div class="city-header" onclick="toggleCard(\'tickets\')"><div class="city-num ticket-icon">🎫</div><div class="city-info"><div class="city-title">门票预约清单</div><div class="city-sub">这些不提前约就进不去</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table"><tr><td style="color:var(--text-muted);font-size:12px">名称</td><td style="color:var(--text-muted);font-size:12px">城市</td><td style="color:var(--text-muted);font-size:12px">提前</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tkq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.name,q)+'</td><td>'+hi(t.where,q)+'</td><td style="color:var(--danger);font-weight:600">'+hi(t.lead,q)+'</td><td style="font-size:11.5px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
+  tk.innerHTML='<div class="city-header" onclick="toggleCard(\'tickets\')"><div class="city-num ticket-icon">🎫</div><div class="city-info"><div class="city-title">门票预约清单</div><div class="city-sub">这些不提前约就进不去</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table stacked-table"><tr class="table-head"><td style="color:var(--text-muted);font-size:12px">名称</td><td style="color:var(--text-muted);font-size:12px">城市</td><td style="color:var(--text-muted);font-size:12px">提前</td><td style="color:var(--text-muted);font-size:12px">备注</td></tr>'+tkq.map(function(t){return'<tr><td style="font-weight:600">'+hi(t.name,q)+'</td><td data-label="城市">'+hi(t.where,q)+'</td><td data-label="提前" style="color:var(--danger);font-weight:600">'+hi(t.lead,q)+'</td><td data-label="备注" style="font-size:11.5px;color:var(--text-muted)">'+hi(t.note,q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(tk);
 
-  var fl=document.createElement('div');fl.className='city-card open';fl.id='flights';
+  var fl=document.createElement('div');fl.className='city-card'+(q?' open':'');fl.id='flights';
   if(q&&!ms("航班机票海南深圳米兰罗马杭州",q))fl.classList.add('hidden');else any=1;
-  fl.innerHTML='<div class="city-header" onclick="toggleCard(\'flights\')"><div class="city-num" style="background:#202830;color:#60a0d0">✈️</div><div class="city-info"><div class="city-title">已订机票</div><div class="city-sub">'+hi(FLIGHTS.note,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:8px 0 4px;">🛫 去程</div><table class="budget-table">'+FLIGHTS.outbound.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td style="white-space:nowrap">'+hi(t.date,q)+'</td><td>'+hi(t.route,q)+'</td><td style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:12px 0 4px;">🛬 回程</div><table class="budget-table">'+FLIGHTS.return.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td style="white-space:nowrap">'+hi(t.date,q)+'</td><td>'+hi(t.route,q)+'</td><td style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table></div>';
+  fl.innerHTML='<div class="city-header" onclick="toggleCard(\'flights\')"><div class="city-num" style="background:#202830;color:#60a0d0">✈️</div><div class="city-info"><div class="city-title">已订机票</div><div class="city-sub">'+hi(FLIGHTS.note,q)+'</div></div><span class="city-arrow">▼</span></div><div class="city-body"><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:8px 0 4px;">🛫 去程</div><table class="budget-table stacked-table">'+FLIGHTS.outbound.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td data-label="日期" style="white-space:nowrap">'+hi(t.date,q)+'</td><td data-label="行程">'+hi(t.route,q)+'</td><td data-label="时间" style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table><div style="font-weight:600;font-size:12.5px;color:var(--accent);margin:12px 0 4px;">🛬 回程</div><table class="budget-table stacked-table">'+FLIGHTS.return.map(function(t){return'<tr><td style="font-weight:600;white-space:nowrap">'+hi(t.flight,q)+'</td><td data-label="日期" style="white-space:nowrap">'+hi(t.date,q)+'</td><td data-label="行程">'+hi(t.route,q)+'</td><td data-label="时间" style="white-space:nowrap;font-weight:500">'+hi(t.time,q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(fl);
 
-  var bg=document.createElement('div');bg.className='city-card open';
+  var bg=document.createElement('div');bg.className='city-card'+(q?' open':'');bg.id='budget';
   if(q&&!ms("预算机票住宿火车票餐饮门票合计",q))bg.classList.add('hidden');else any=1;
-  bg.innerHTML='<div class="city-header" onclick="toggleCard(\'budget\')"><div class="city-num" style="background:#202830;color:#60a0d0">💰</div><div class="city-info"><div class="city-title">预算参考（每人）</div><div class="city-sub">总计约 €1,410-2,630（不含机票）</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table">'+BUDGET.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td>'+hi(r[1],q)+'</td></tr>'}).join('')+'</table></div>';
+  bg.innerHTML='<div class="city-header" onclick="toggleCard(\'budget\')"><div class="city-num" style="background:#202830;color:#60a0d0">💰</div><div class="city-info"><div class="city-title">预算参考（每人）</div><div class="city-sub">总计约 €1,410-2,630（不含机票）</div></div><span class="city-arrow">▼</span></div><div class="city-body"><table class="budget-table stacked-table total-table">'+BUDGET.map(function(r){return'<tr><td>'+hi(r[0],q)+'</td><td data-label="估算">'+hi(r[1],q)+'</td></tr>'}).join('')+'</table></div>';
   c.appendChild(bg);
 
-  var cl=document.createElement('div');cl.className='city-card open';cl.id='checklist';
+  var cl=document.createElement('div');cl.className='city-card'+(q?' open':'');cl.id='checklist';
   var saved=JSON.parse(localStorage.getItem('italy_ck')||'{}');
   var cats=CHECKLIST;
   if(q){cats=cats.map(function(x){return{name:x.name,items:x.items.filter(function(i){return i.toLowerCase().indexOf(q)!==-1})}}).filter(function(x){return x.items.length>0||x.name.toLowerCase().indexOf(q)!==-1});}
@@ -485,6 +536,7 @@ function buildAll(){
 function toggleCard(id){var el=document.getElementById(id);if(el){el.classList.toggle('open');if(el.classList.contains('open'))el.scrollIntoView({behavior:'smooth',block:'start'})}}
 function jump(id){var el=document.getElementById(id);if(el){if(!el.classList.contains('open'))el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'start'})}}
 function toggleCheck(el,item){var s=JSON.parse(localStorage.getItem('italy_ck')||'{}');if(el.classList.contains('checked')){el.classList.remove('checked');el.querySelector('.check-box').textContent='';delete s[item]}else{el.classList.add('checked');el.querySelector('.check-box').textContent='✓';s[item]=true}localStorage.setItem('italy_ck',JSON.stringify(s));buildAll()}
+function clearSearch(){var input=document.getElementById('globalSearch');input.value='';q='';buildAll();input.focus()}
 
 document.getElementById('globalSearch').addEventListener('input',function(e){q=e.target.value.trim().toLowerCase();buildAll()});
 document.getElementById('themeToggle').addEventListener('click',function(){var t=document.body.getAttribute('data-theme');var n=t==='dark'?'light':'dark';document.body.setAttribute('data-theme',n);localStorage.setItem('italy-theme',n);document.getElementById('themeToggle').textContent=n==='dark'?'☾':'☀'});
