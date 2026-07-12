@@ -305,22 +305,23 @@ var CITIES=[
       {time:"下午",text:"🏰 斯福尔扎城堡 + 森皮奥内公园"},
       {time:"晚上",text:"🍸 Navigli 运河区 aperitivo",hl:1},
     ]},
-    {label:"D3 · 9/28（周一 · 弹性日）",timeline:[
-      {time:"上午",text:"🌊 科莫湖半日/一日备选",hl:1,note:"Milano Centrale → Como S. Giovanni ~40min"},
-      {time:"下午",text:"☕ 天气一般则留在米兰购物、咖啡馆、城市漫步"},
-      {time:"晚上",text:"🍝 自由晚餐 + 整理行李"},
+    {label:"D3 · 9/28（周一 · 科莫湖）",timeline:[
+      {time:"上午",text:"🚄 Milano Centrale → Varenna Esino",hl:1,note:"抵达后游览 Villa Monastero 临湖植物园"},
+      {time:"下午",text:"⛴️ Varenna → Bellagio → Varenna",hl:1,note:"单程约15min；Bellagio 漫步 + Villa Melzi 花园"},
+      {time:"16:00前后",text:"🚄 开始返程，为轮渡和火车各留一班缓冲"},
+      {time:"晚上",text:"🍝 返回米兰自由晚餐 + 整理行李"},
     ]}
   ],warnings:[
     {level:"danger",text:"🎫 《最后的晚餐》需提前2-3个月预约！不要放周一，优先抢 D2 周日上午。"},
     {level:"info",text:"大教堂登顶推荐步行（250级台阶），电梯需排队且贵一倍"},
-    {level:"info",text:"周一多数博物馆闭馆，D3 适合安排科莫湖或米兰轻松补漏。"},
+    {level:"warn",text:"科莫湖船班和天气可能调整；恶劣天气再改为米兰室内日。"},
   ],details:[
     ["机场→市区","Malpensa Express ~50min，€13"],
     ["住宿区域","大教堂附近 或 中央车站附近"],
     ["市内交通","地铁单次 €2.20，日票 €7.60"],
     ["美食推荐","Risotto alla Milanese / Cotoletta / Panettone"],
   ]},
-  {id:"firenze",cls:"city-firenze",icon:"🎨",name:"佛罗伦萨 Firenze",sub:"文艺复兴核心 · 2天",nights:"2晚",status:["2晚","2个美术馆预约","高铁抵达","全靠步行"],summary:'<span class="summary-chip chip-accent">🏨 百花大教堂附近</span><span class="summary-chip">🚶 全靠步行</span><span class="summary-chip chip-warn">🌅 米开朗基罗广场日落</span>',days:[
+  {id:"firenze",cls:"city-firenze",icon:"🎨",name:"佛罗伦萨 Firenze",sub:"文艺复兴核心 · 3天",nights:"3晚",status:["3晚","乌菲兹+大卫+穹顶","高铁抵达","全靠步行"],summary:'<span class="summary-chip chip-accent">🏨 SMN至老城之间</span><span class="summary-chip">🚶 全靠步行</span><span class="summary-chip chip-warn">🌅 米开朗基罗广场日落</span>',days:[
     {label:"D4 · 9/29（移动日）",timeline:[
       {time:"上午",text:"🚄 米兰→佛罗伦萨 Frecciarossa/Italo ~1.75h",hl:1,note:"提前买票 €30-60 · 建议班次 9:00-10:00"},
       {time:"下午",text:"🏨 入住 + 圣母百花大教堂区探索"},
@@ -328,42 +329,43 @@ var CITIES=[
       {time:"日落",text:"🌅 米开朗基罗广场看佛罗伦萨全景日落",hl:1},
       {time:"晚上",text:"🍷 市中心晚餐"},
     ]},
-    {label:"D5 · 9/30（完整日）",timeline:[
+    {label:"D5 · 9/30（周三 · 乌菲兹与美第奇）",timeline:[
       {time:"上午",text:"🎨 乌菲兹美术馆",hl:1,note:"波提切利/达芬奇/拉斐尔，提前预约，预留2-3h"},
-      {time:"下午",text:"🗿 学院美术馆（《大卫》）"},
-      {time:"傍晚",text:"🛍️ Oltrarno 区自由漫步 + 手工皮具店"},
-      {time:"晚上",text:"🥩 Bistecca alla Fiorentina（佛罗伦萨牛排）",hl:1},
+      {time:"中午",text:"🏛️ 领主广场 + 佣兵凉廊休息"},
+      {time:"下午",text:"🛍️ Oltrarno 区 + 皮蒂宫 / 波波里花园二选一"},
+      {time:"晚上",text:"🌉 阿诺河与老桥黄昏 + Oltrarno 晚餐"},
+    ]},
+    {label:"D6 · 10/1（周四 · 大卫、穹顶与圣十字）",timeline:[
+      {time:"08:30左右",text:"🗿 学院美术馆（《大卫》）",hl:1,note:"按实际预约时段调整顺序"},
+      {time:"上午",text:"⛪ 百花大教堂穹顶登顶",hl:1,note:"463级台阶、无电梯，预留约2h"},
+      {time:"下午",text:"⛪ 圣十字大殿",note:"体力允许再去圣米尼亚托教堂"},
+      {time:"晚上",text:"🥩 佛罗伦萨牛排 + 整理行李",hl:1},
     ]}
   ],warnings:[
     {level:"danger",text:"🎫 乌菲兹 + 学院美术馆需提前预约！旺季排队可超2小时。"},
-    {level:"warn",text:"2晚行程，学院美术馆和皮蒂宫二选一即可，不必赶。"},
+    {level:"danger",text:"🎫 百花大教堂穹顶也需预约；463级台阶无电梯，注意体力安排。"},
+    {level:"warn",text:"D5 下午只选皮蒂宫或波波里花园，避免行程过密。"},
   ],details:[
     ["米兰→佛罗伦萨","高铁 1.75-2h，€30-60"],
     ["住宿区域","百花大教堂/SMN车站/老桥北岸"],
     ["美食推荐","Bistecca / Lampredotto / Gelato"],
-    ["可选半日","比萨斜塔 或 锡耶纳（火车 ~1h）"],
+    ["核心预约","乌菲兹 / 学院美术馆 / 百花大教堂穹顶"],
   ]},
-  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"披萨故乡 + 庞贝 · 2晚",nights:"2晚",status:["2晚","圣塞维诺+庞贝","长高铁日","注意防盗"],summary:'<span class="summary-chip chip-accent">🏨 Centro Storico/Chiaia</span><span class="summary-chip">🚇 地铁+小火车</span><span class="summary-chip chip-warn">🍕 2晚更从容</span>',days:[
-    {label:"D6 · 10/1（周四 · 南下日）",timeline:[
+  {id:"napoli",cls:"city-napoli",icon:"🍕",name:"那不勒斯 Napoli",sub:"老城 + 海湾 · 1晚",nights:"1晚",status:["1晚","圣塞维诺","长高铁日","注意防盗"],summary:'<span class="summary-chip chip-accent">🏨 Palazzo Salgar</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-warn">🍕 披萨 + 海湾日落</span>',days:[
+    {label:"D7 · 10/2（周五 · 南下日）",timeline:[
       {time:"上午",text:"🚄 佛罗伦萨→那不勒斯 Centrale ~2.75-3h",hl:1,note:"建议班次 8:30-9:30，经停罗马但不入住"},
-      {time:"下午",text:"🏨 入住/寄存 + Spaccanapoli、Via dei Tribunali 老城漫步"},
-      {time:"下午",text:"🗿 圣塞维诺礼拜堂《蒙纱的基督》",hl:1,note:"小馆限流，务必提前预约"},
-      {time:"晚上",text:"🍕 披萨朝圣！Da Michele 或 Sorbillo",hl:1},
-    ]},
-    {label:"D7 · 10/2（周五 · 庞贝日）",timeline:[
-      {time:"上午",text:"🚂 前往 Pompei Scavi",hl:1,note:"Circumvesuviana 或 Campania Express ~35-45min"},
-      {time:"上午-下午",text:"🏛️ 庞贝遗址核心路线 4-5h",hl:1,note:"论坛、浴场、剧场、主街、代表性宅邸"},
-      {time:"下午",text:"🚂 返回那不勒斯，酒店休息；体力好可去蛋堡/海边"},
-      {time:"晚上",text:"🌊 那不勒斯海边或老城晚餐"},
+      {time:"中午",text:"🍕 Da Michele 或 Sorbillo 披萨"},
+      {time:"下午",text:"🏘️ Spaccanapoli、Via dei Tribunali、圣格雷戈里奥阿尔梅诺街"},
+      {time:"14:00-16:00",text:"🗿 圣塞维诺礼拜堂《蒙纱的基督》",hl:1,note:"小馆限流，务必提前预约"},
+      {time:"日落",text:"🌊 蛋堡外观 + 那不勒斯海湾日落",hl:1,note:"海边或老城晚餐"},
     ]}
   ],warnings:[
-    {level:"danger",text:"🎫 圣塞维诺礼拜堂务必放 D6 下午，不要留到闭馆日或庞贝日硬塞。"},
+    {level:"danger",text:"🎫 圣塞维诺礼拜堂建议预约 D7 14:00-16:00，并按预约时段调整老城路线。"},
     {level:"danger",text:"🚨 那不勒斯中央火车站、老城和地铁周边注意防盗，背包放前面。"},
-    {level:"info",text:"庞贝遮阴少，带水、防晒、舒适鞋；建议提前下载地图或租语音导览。"},
+    {level:"info",text:"那不勒斯仅住1晚，本次不安排庞贝，聚焦老城、圣塞维诺和海湾。"},
   ],details:[
     ["佛罗伦萨→那不勒斯","高铁 ~2.75-3h，€35-80"],
-    ["那不勒斯→庞贝","Circumvesuviana / Campania Express 35-45min"],
-    ["住宿区域","Centro Storico / Chiaia / Napoli Centrale 周边优先看安全和交通"],
+    ["住宿","Palazzo Salgar"],
     ["美食必试","Pizza / Sfogliatella / Babà / Cuoppo"],
   ]},
   {id:"roma",cls:"city-roma",icon:"🏛️",name:"罗马 Roma",sub:"古罗马 + 梵蒂冈 · 3晚收尾",nights:"3晚",status:["3晚收尾","斗兽场+梵蒂冈","机场从容","地铁+步行"],summary:'<span class="summary-chip chip-accent">🏨 Termini/Monti/Prati</span><span class="summary-chip">🚇 地铁+步行</span><span class="summary-chip chip-danger">⚠ 梵蒂冈着装要求</span>',days:[
@@ -373,7 +375,7 @@ var CITIES=[
       {time:"晚上",text:"🍝 Monti 区晚餐，可顺路看斗兽场夜景"},
     ]},
     {label:"D9 · 10/4（周日 · 古罗马日）",timeline:[
-      {time:"上午",text:"🏟️ 斗兽场",hl:1,note:"预约早时段"},
+      {time:"08:00前",text:"🏟️ 到斗兽场区域排队领取免费票",hl:1,note:"10/4为首个周日，不可预约，先到先得"},
       {time:"上午-下午",text:"🏛️ 古罗马广场 → 帕拉丁山",hl:1,note:"三合一联票，整体预留 4-5h"},
       {time:"下午",text:"卡比托利欧山 → 威尼斯广场 → 图拉真市场外观"},
       {time:"晚上",text:"🍷 Trastevere 特拉斯提弗列晚餐"},
@@ -385,6 +387,7 @@ var CITIES=[
       {time:"晚上",text:"🍝 纳沃纳广场 / Campo de' Fiori / Prati 晚餐 + 整理行李"},
     ]}
   ],warnings:[
+    {level:"danger",text:"🎫 10/4 首个周日斗兽场免费票不可预约，需现场领取；出发前再次核对官方公告。"},
     {level:"danger",text:"🎫 梵蒂冈博物馆提前1-2个月预约，周一安排通常比周日稳，但以2026官方日历为准。"},
     {level:"danger",text:"⛪ 梵蒂冈有着装要求：膝盖和肩膀必须遮盖！短裤/吊带禁止入内。"},
     {level:"info",text:"罗马连续住 D8-D10 三晚，D11 早上去 FCO 不需要从外城赶车。"},
@@ -396,29 +399,29 @@ var CITIES=[
   ]}
 ];
 var DEP={label:"D11 · 10/6 / D12 · 10/7（返程）",timeline:[
-  {time:"D11 早上",text:"🏨 罗马酒店退房 → Termini → Leonardo Express 至 FCO",hl:1,note:"~30min，建议 7:30-8:00 出发"},
+  {time:"D11 07:15-07:30",text:"🏨 罗马酒店退房 → Termini → Leonardo Express 至 FCO",hl:1,note:"~30min；如需退税宁可更早"},
   {time:"D11 10/6",text:"✈️ 罗马 FCO 11:15 起飞 HU438",hl:1},
   {time:"D12 10/7",text:"🏠 深圳→杭州 10:40 抵达"},
 ],warn:"✅ D8-D10 连续住罗马，D11 早上从容去 FCO，不必赶早班高铁。"};
 var TRAINS=[
   {route:"米兰 → 佛罗伦萨",time:"~1.75-2h",price:"€30-60",note:"Frecciarossa / Italo · D4 9:00-10:00"},
-  {route:"佛罗伦萨 → 那不勒斯",time:"~2.75-3h",price:"€35-80",note:"Frecciarossa / Italo · D6 8:30-9:30，经停罗马但不入住"},
+  {route:"佛罗伦萨 → 那不勒斯",time:"~2.75-3h",price:"€35-80",note:"Frecciarossa / Italo · D7 8:30-9:00，经停罗马但不入住"},
   {route:"那不勒斯 → 罗马",time:"~1h",price:"€12-30",note:"Frecciarossa / Italo · D8 9:00-10:00"},
-  {route:"那不勒斯 → 庞贝",time:"~30-45min",price:"€3-5",note:"Circumvesuviana 小火车"},
+  {route:"米兰 → Varenna Esino",time:"~1h",price:"区域火车",note:"D3 科莫湖；Varenna ↔ Bellagio 轮渡约15min"},
   {route:"Malpensa → 米兰中央",time:"~50min",price:"€13",note:"Malpensa Express"},
 ];
 var TICKETS=[
   {name:"《最后的晚餐》",where:"米兰",lead:"提前2-3个月",note:"D2 周日上午优先，不要放周一；每次限15-20分钟"},
   {name:"乌菲兹美术馆",where:"佛罗伦萨",lead:"提前1-2个月",note:""},
   {name:"学院美术馆",where:"佛罗伦萨",lead:"提前1-2个月",note:"《大卫》"},
-  {name:"圣塞维诺礼拜堂",where:"那不勒斯",lead:"提前1-2个月",note:"D6 下午；《蒙纱的基督》，小馆限流"},
-  {name:"庞贝古城",where:"那不勒斯周边",lead:"提前2-4周",note:"D7；可现场/官网购票，建议避开正午暴走"},
-  {name:"斗兽场",where:"罗马",lead:"提前1-2个月",note:"三合一联票含古罗马广场+帕拉丁山"},
+  {name:"百花大教堂穹顶",where:"佛罗伦萨",lead:"提前预约",note:"D6；463级台阶，无电梯"},
+  {name:"圣塞维诺礼拜堂",where:"那不勒斯",lead:"提前1-2个月",note:"D7 14:00-16:00；《蒙纱的基督》，小馆限流"},
+  {name:"斗兽场",where:"罗马",lead:"现场领取",note:"D9 首个周日免费票不可预约，建议08:00前到场"},
   {name:"梵蒂冈博物馆",where:"罗马",lead:"提前1-2个月",note:"D10 周一；含西斯廷教堂，按2026官方日历复核"},
 ];
 var CHECKLIST=[
   {name:"✈️ 机票 & 签证",items:["申根签证（VFSGlobal预约）","旅行保险","酒店预订单（签证用）","行程单","护照有效期检查（>6个月）"]},
-  {name:"🎫 核心门票",items:["《最后的晚餐》（2-3个月前）","乌菲兹美术馆","学院美术馆","斗兽场联票","梵蒂冈博物馆+西斯廷","圣塞维诺礼拜堂"]},
+  {name:"🎫 核心门票",items:["《最后的晚餐》（2-3个月前）","乌菲兹美术馆","学院美术馆","百花大教堂穹顶","斗兽场首个周日现场免费票","梵蒂冈博物馆+西斯廷","圣塞维诺礼拜堂"]},
   {name:"🚄 高铁",items:["米兰→佛罗伦萨 高铁票","佛罗伦萨→那不勒斯 高铁票","那不勒斯→罗马 高铁票","下载 Trenitalia / Italo App"]},
   {name:"👕 行李（10月初秋）",items:["舒适步行鞋（石板路多）","轻薄长袖+夹克","教堂着装：遮盖膝盖和肩膀","防盗斜挎包","充电转换插头（意标）"]},
   {name:"📱 出行必备",items:["Google Maps / 离线地图","翻译App（意大利语）","充电宝","eSIM / TIM/Vodafone 游客卡","酒店+门票确认函打印/截图"]},
@@ -458,7 +461,7 @@ function dayHead(label){
   return '<div class="day-head"><div class="day-badge">'+hi(d,q)+'</div><div class="day-meta">'+hi(rest,q)+'</div></div>';
 }
 function tripDashboard(){
-  return '<section class="trip-dashboard"><div class="dash-eyebrow">Italy 2026</div><div class="dash-title">意大利国庆之旅</div><div class="dash-sub">米兰进 / 罗马出，把罗马放在最后连续收尾。</div><div class="summary-bar"><span class="summary-chip chip-accent">📅 9/25-10/7</span><span class="summary-chip chip-warn">🏨 4城10晚</span><span class="summary-chip chip-green">🚄 高铁串联</span><span class="summary-chip">✈️ 米兰进罗马出</span></div><div class="route-strip"><span class="route-stop">杭州</span><span class="route-arrow">→</span><span class="route-stop">深圳</span><span class="route-arrow">→</span><span class="route-stop">米兰</span><span class="route-arrow">→</span><span class="route-stop">佛罗伦萨</span><span class="route-arrow">→</span><span class="route-stop">那不勒斯</span><span class="route-arrow">→</span><span class="route-stop">罗马</span><span class="route-arrow">→</span><span class="route-stop">杭州</span></div><div class="priority-panel"><div class="priority-title">优先锁定</div><div class="priority-item"><span>🎫</span><span><strong>先抢预约：</strong>《最后的晚餐》、乌菲兹、学院美术馆、圣塞维诺、斗兽场、梵蒂冈。</span></div><div class="priority-item"><span>🚄</span><span><strong>先买高铁：</strong>米兰→佛罗伦萨、佛罗伦萨→那不勒斯、那不勒斯→罗马。</span></div></div></section>';
+  return '<section class="trip-dashboard"><div class="dash-eyebrow">Italy 2026</div><div class="dash-title">意大利国庆之旅</div><div class="dash-sub">米兰进 / 罗马出，佛罗伦萨3晚慢游，那不勒斯1晚精华。</div><div class="summary-bar"><span class="summary-chip chip-accent">📅 9/25-10/7</span><span class="summary-chip chip-warn">🏨 4城10晚</span><span class="summary-chip chip-green">🚄 高铁串联</span><span class="summary-chip">✈️ 米兰进罗马出</span></div><div class="route-strip"><span class="route-stop">杭州</span><span class="route-arrow">→</span><span class="route-stop">深圳</span><span class="route-arrow">→</span><span class="route-stop">米兰·3晚</span><span class="route-arrow">→</span><span class="route-stop">佛罗伦萨·3晚</span><span class="route-arrow">→</span><span class="route-stop">那不勒斯·1晚</span><span class="route-arrow">→</span><span class="route-stop">罗马·3晚</span><span class="route-arrow">→</span><span class="route-stop">杭州</span></div><div class="priority-panel"><div class="priority-title">优先锁定</div><div class="priority-item"><span>🎫</span><span><strong>先抢预约：</strong>《最后的晚餐》、乌菲兹、学院美术馆、百花大教堂穹顶、圣塞维诺、梵蒂冈；斗兽场首个周日现场领票。</span></div><div class="priority-item"><span>🚄</span><span><strong>先买高铁：</strong>米兰→佛罗伦萨、佛罗伦萨→那不勒斯、那不勒斯→罗马。</span></div></div></section>';
 }
 
 function buildAll(){
